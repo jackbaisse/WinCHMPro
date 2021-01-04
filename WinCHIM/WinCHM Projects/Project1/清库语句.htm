@@ -1,0 +1,113 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>清库语句</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>delete from advicefrequency;&nbsp;&nbsp; 
+--医嘱相关表<BR>delete from advicegroup;&nbsp; --成套医嘱库<BR>delete from 
+advicegroupdetail; --成套医嘱明细库<BR>delete from allergyhistory; --过敏史<BR>delete from 
+analysis_embed; <BR>delete from analysis_project;--医师病历查询记录库<BR>delete from 
+applyrecord; --病历借阅申请记录表<BR>delete from bedinfo; --病人床位信息库<BR>delete from bed; 
+--床位表<BR>delete from consultapply; --会诊申请<BR>delete from consultapplydepartment; 
+--会诊部门<BR>delete from consultrecorddepartment; --会诊记录部门<BR>delete from 
+consult_deptautio;&nbsp; --会诊科室审核人表<BR>delete from consult_doctorparent;&nbsp; 
+--会诊审核人配置<BR>update users&nbsp; set deptid = '', wardid = '' where id = 
+'00';<BR>delete from users where id!='00'; --职工代码<BR>delete from department; 
+--科室代码库<BR>delete from department_a; --一级科室<BR>delete from department_b; 
+--二级科室<BR>delete from dept2dgrs; --病种，临床科室对应库<BR>delete from dept2disease; 
+--科室病种对应<BR>delete from dept2ward; --科室病区对应库<BR>delete from dept_deductpoint; 
+--科室失分统计主表<BR>delete from dept_deductpointdetail; --科室失分统计子表<BR>delete from 
+Doctor_AssignPatient; --病区一览模医师分管病患<BR>delete from drugallergy; 
+--病人过敏记录<BR>delete from drugdoselimit; --处方药品剂量限制库<BR>delete from emrdept2his; 
+--EMR 与 HIS 部门的对应关系<BR>delete from emr_pat_diag; --初步诊断、修正诊断等<BR>delete from 
+familyhistory; --家族史<BR>delete from iem_mainpage_basicinfo; --首页基本信息<BR>delete 
+from iem_mainpage_diagnosis; --首页诊断<BR>delete from iem_mainpage_operation; 
+--首页手术<BR>delete from iem_mainpage_basicinfo_2012; --首页基本信息<BR>delete from 
+iem_mainpage_diagnosis_2012; --首页诊断<BR>delete from iem_mainpage_operation_2012; 
+--首页手术<BR>delete from iem_mainpage_basicinfo_sx; --首页基本信息<BR>delete from 
+iem_mainpage_diagnosis_sx; --首页诊断<BR>delete from iem_mainpage_operation_sx; 
+--首页手术<BR>delete from illnesshistory; --疾病史<BR>delete from inpatient; 
+--病人信息<BR>delete from inpatientreport; --病人报告清单数据<BR>delete from 
+inpatientreportlisreslut; --检验报告<BR>delete from inpatientreportrisreslut; 
+--检查报告<BR>delete from inpatient_default;-- 首页默认值表<BR>delete from jobmanagerlog; 
+--任务管理器日志<BR>delete from long_order; --(病区)长期医嘱 <BR>delete from 
+newsarticle;--新闻<BR>delete from notesonnursing; --护理记录表<BR>delete from 
+nursrecordtable; --病人护理记录单表格表<BR>delete from operatehistory; --操作记录库 <BR>delete 
+from patdiag; ----初步诊断、修正诊断等<BR>delete from patientcontacts; --病人联系人表 <BR>delete 
+from patientrecordlog; --(病历文件)操作记录库<BR>delete from personalhistory; 
+--个人史<BR>delete from printhistory; --打印历史库<BR>delete from qcgrade; 
+--评分分数记录<BR>delete from qcproblem; --质量问题库<BR>delete from qcproblemdescription; 
+--问题登记<BR>delete from qcrecord; --病历质量控制记录库<BR>delete from&nbsp; qc_dept;&nbsp; 
+<BR>delete from qc_doctor;<BR>delete from qc_doc_record_rate;<BR>delete from 
+qc_hospital_rate;<BR>delete from qc_singledisease;<BR>delete from recorddetail; 
+--病历(详细记录)库<BR>delete from surgeryhistory; --手术史<BR>delete from 
+templatepersongroup; --个人模板分类<BR>delete from templatesort_person; <BR>delete 
+from template_collect; --病历抽取<BR>delete from template_department; 
+--科室模板<BR>delete from template_person; ----个人模板<BR>delete from template_recent; 
+--最近使用模板<BR>delete from template_table; --护理记录单表格模板<BR>delete from 
+templet2hisdept; --模板对应HIS部门<BR>delete from tempusers; --临时授权用户<BR>delete from 
+temp_order; --临时医嘱库 <BR>delete from test_person_info; --测试数据表<BR>delete from 
+trackrecord; --(病历文件)阅读记录库<BR>delete from 
+tmp_querybrowserinward;&nbsp;&nbsp;&nbsp; --以下tmp是临时表 <BR>delete from 
+tmp_querybrowserinwardpat;<BR>delete from 
+tmp_querybrowserinwardpatexist;<BR>delete from 
+tmp_querybrowserinward_extraop;<BR>delete from tmp_queryhistory_pats;<BR>delete 
+from tmp_queryhistory_result;<BR>delete from tmp_queryinwardpatients;<BR>delete 
+from tmp_queryinwardpats_extraop;<BR>delete from 
+tmp_queryownmanagerpat;<BR>delete from tmp_queryqcgrade;<BR>delete from 
+tmp_queryquitpatientnodoctor;<BR>delete from 
+tmp_queryquitpatientno_extraop;<BR>delete from tmp_templet;<BR>delete from 
+tmp_emr_queryordersuites;<BR>delete from 
+tmp_zymosis_analyse;<BR> delete TCZ05SUM;<BR>delete from 
+user_login; --用户登录记录<BR>delete from user2dept; --职工科室对应库 <BR>delete from ward; 
+--病区<BR>delete from ZYMOSIS_REPORT; --传染病<BR>delete from ZYMOSIS_REPORT_SN; 
+--传染病<BR> delete from 
+yidanregPc;--人员登入表</P>
+<P> delete from 
+nurseinpatstate;<BR>delete from incommonnote;<BR>delete from incommonnote_tab;<BR>delete 
+from incommonnote_item;<BR>delete from qcrecord;<BR>delete from 
+emrtemplet_item_person;<BR>delete from 
+emrtemplet_item_person_catalog;<BR>delete INCOMMONNOTE_COLUMN;<BR>delete 
+INCOMMONNOTE_COLUMN_TYPE;<BR>delete INCOMMONNOTE_ROW;<BR> delete 
+INPATIENTEXT;--书写状态<BR>  delete&nbsp;incommonnote_rowhis;-- 
+列修改记录<BR>  
+delete&nbsp;Incommonnote_Columnhis;--这是行修改记录<BR> delete 
+ATTENDINGPHYSICIAN;<BR> delete BGCARD;<BR>delete CARDIOVASCULARCARD;<BR>delete 
+CURRENTDIAG;<BR>delete DIAGNOSISOFCHINESE_NEW;<BR>delete EMR_TEMPLET_INDEX;<BR>delete 
+NEWBABY_NURSING_RECORD;<BR>delete SCALE_QUESTION;<BR>commit;<BR></P>
+<P>-------------上线前清除业务数据--------------------------</P>
+<P>delete from emr_pat_diag; --初步诊断、修正诊断等<BR>delete from 
+familyhistory; --家族史<BR>delete from iem_mainpage_basicinfo; --首页基本信息<BR>delete 
+from iem_mainpage_diagnosis; --首页诊断<BR>delete from iem_mainpage_operation; 
+--首页手术<BR>delete from iem_mainpage_basicinfo_2012; --首页基本信息<BR>delete from 
+iem_mainpage_diagnosis_2012; --首页诊断<BR>delete from iem_mainpage_operation_2012; 
+--首页手术<BR>delete from iem_mainpage_basicinfo_sx; --首页基本信息<BR>delete from 
+iem_mainpage_diagnosis_sx; --首页诊断<BR>delete from iem_mainpage_operation_sx; 
+--首页手术<BR>delete from illnesshistory; --疾病史 <BR>    delete from inpatient; 
+--病人信息<BR>delete from inpatientreport; --病人报告清单数据<BR>delete from 
+inpatientreportlisreslut; --检验报告<BR>delete from inpatientreportrisreslut; 
+--检查报告<BR>delete from inpatient_default;-- 首页默认值表<BR>delete from jobmanagerlog; 
+--任务管理器日志<BR>delete from long_order; --(病区)长期医嘱 <BR>delete from 
+newsarticle;--新闻<BR>delete from notesonnursing; --护理记录表<BR>delete from 
+nursrecordtable; --病人护理记录单表格表<BR>delete from operatehistory; --操作记录库 <BR>delete 
+from patdiag; ----初步诊断、修正诊断等<BR>delete from patientcontacts; --病人联系人表 <BR>delete 
+from patientrecordlog; --(病历文件)操作记录库<BR>delete from personalhistory; 
+--个人史<BR>delete from printhistory; --打印历史库<BR>delete from qcgrade; 
+--评分分数记录<BR>delete from qcproblem; --质量问题库<BR>delete from qcproblemdescription; 
+--问题登记<BR>delete from qcrecord; --病历质量控制记录库<BR>delete from recorddetail; 
+--病历(详细记录)库<BR>delete from surgeryhistory; --手术史<BR> delete from nurseinpatstate;--体温单<BR>  delete&nbsp;incommonnote_rowhis;-- 
+列修改记录<BR> delete&nbsp; 
+Incommonnote_Columnhis;--这是行修改记录<BR>  delete  inpatientchangeinfo--转科记录表</P></body>
+</html>

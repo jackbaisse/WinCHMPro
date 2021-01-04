@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>1、安装环境</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>在primary搭建数据库软件，建立lsnrctl监听，采用dbca搭建实例，在standby上搭建数据库软件，建立监听，但是不需要采用dbca建立实例。<BR>oracle软件版本： 
+oracle 11.2.0.1.0<BR>IP地址： 
+emr库（192.168.121.217）、emr_db库（192.168.121.218）<BR>db_unique_name： emr库（pdunq）、emrdb库（pdunq_dg）</P>
+<P>一、规划</P>
+<P>
+<TABLE style="HEIGHT: 80px; WIDTH: 438px; BORDER-COLLAPSE: collapse" 
+borderColor=#000000 cellSpacing=0 cellPadding=2 width=438 border=1>
+  
+  <TR>
+    <TD>规划</TD>
+    <TD>&nbsp;主库</TD>
+    <TD>&nbsp; 备库</TD></TR>
+  <TR>
+    <TD>数据库版本</TD>
+    <TD>11.2.0.4</TD>
+    <TD>11.2.0.4</TD></TR>
+  <TR>
+    <TD>IP</TD>
+    <TD>192.168.0.252</TD>
+    <TD>192.168.0.250</TD></TR>
+  <TR>
+    <TD>实例</TD>
+    <TD>testemr</TD>
+    <TD>sbemr</TD></TR>
+  <TR>
+    <TD>静态监听</TD>
+    <TD>1522</TD>
+    <TD>1522</TD></TR>
+  <TR>
+    <TD bgColor=#de0003>&nbsp;db_name&nbsp;&nbsp;</TD>
+    <TD bgColor=#de0003>&nbsp;testemr</TD>
+    <TD bgColor=#de0003>&nbsp;testemr</TD></TR>
+  <TR>
+    <TD bgColor=#de0003>&nbsp;instance_name&nbsp;</TD>
+    <TD bgColor=#de0003>&nbsp;testemr</TD>
+    <TD bgColor=#de0003>&nbsp;sbemr</TD></TR>
+  <TR>
+    <TD bgColor=#de0003>&nbsp;tnsnames.ora&nbsp;</TD>
+    <TD bgColor=#de0003>tnstestemr</TD>
+    <TD bgColor=#de0003>&nbsp;tnssemr</TD></TR>
+  <TR>
+    <TD bgColor=#de0003>&nbsp;服务名</TD>
+    <TD bgColor=#de0003>testemr&nbsp;&nbsp;&nbsp;</TD>
+    <TD bgColor=#de0003>&nbsp;testemr</TD></TR></TABLE></P>
+<P>
+二、主库参数设置</P>
+<OL>
+  <LI>
+<DIV>
+启用force logging功能<BR>alter database force 
+  logging;</DIV></LI>
+  <LI>
+<DIV>
+关闭数据库<BR>shutdown immediate;</DIV></LI>
+  <LI>
+<DIV>&nbsp;</DIV></LI></OL>
+<P><A name=去微软></A>&nbsp;</P> 
+</body>
+</html>

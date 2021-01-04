@@ -1,0 +1,28 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>加载系统字体</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、添加命名空间</P>
+<P>system.Drawing.text;system.collections;system.io</P>
+<P>2、窗体加载系统字体<BR>InstalledFontcollection 
+my= new ......&nbsp;&nbsp; 
+//加载系统字体<BR>fontfamily[] my1=my.families;//获取^对象的数组<BR>arraylist list = new 
+arraylist();//声明变量<BR>int count= 
+my1.length;//获取长度<BR>//循环把字体名称写入到控件中<BR>for (int i = 0;i &lt;count; 
+i++)<BR>{<BR>string fontname =my[i].name;<BR><FONT color=#ff0000> _control 
+.items.add(fontname);..<BR>  }<BR><FONT color=#000000>3、字体加粗</FONT> 
+<BR>  </P></FONT></body>
+</html>

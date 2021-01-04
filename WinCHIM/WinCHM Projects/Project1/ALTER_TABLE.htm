@@ -1,0 +1,55 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ALTER TABLE</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">第一，我们要加入一个叫做 
+"Gender" 的栏位。这可以用以下的指令达成： </P>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<DIV class=box 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-FAMILY: verdana; FONT-VARIANT: normal; WIDTH: 92%; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: bold; COLOR: rgb(0,0,0); PADDING-BOTTOM: 8px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 10px; ORPHANS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(221,221,221); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT color=blue>ALTER TABLE Customer ADD Gender char(1);</FONT></DIV>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">接下来，我们要把 
+"Address" 栏位改名为 "Addr"。这可以用以下的指令达成： </P>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<DIV class=box 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-FAMILY: verdana; FONT-VARIANT: normal; WIDTH: 92%; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: bold; COLOR: rgb(0,0,0); PADDING-BOTTOM: 8px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 10px; ORPHANS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(221,221,221); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT color=blue>ALTER TABLE Customer CHANGE Address Addr char(50);</FONT></DIV>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">再来，我们要将 
+"Addr" 栏位的资料种类改为 char(30)。这可以用以下的指令达成： </P>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<DIV class=box 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-FAMILY: verdana; FONT-VARIANT: normal; WIDTH: 92%; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: bold; COLOR: rgb(0,0,0); PADDING-BOTTOM: 8px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 10px; ORPHANS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(221,221,221); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT color=blue>ALTER TABLE Customer MODIFY Addr char(30);</FONT></DIV>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">最后，我们要删除 
+"Gender" 栏位。这可以用以下的指令达成： </P>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<DIV class=box 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-FAMILY: verdana; FONT-VARIANT: normal; WIDTH: 92%; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: bold; COLOR: rgb(0,0,0); PADDING-BOTTOM: 8px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 10px; ORPHANS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(221,221,221); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT color=blue>ALTER TABLE Customer 
+DROP Gender;</FONT></DIV>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">我们要更改表名 "<FONT color=#0000ff>Customer</FONT> 
+" 栏位。这可以用以下的指令达成： </P>
+<P 
+style="FONT-SIZE: 16px; TEXT-DECORATION: none; FONT-FAMILY: Verdana; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></P>
+<DIV class=box 
+style="FONT-SIZE: 13px; TEXT-DECORATION: none; FONT-FAMILY: verdana; FONT-VARIANT: normal; WIDTH: 92%; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: bold; COLOR: rgb(0,0,0); PADDING-BOTTOM: 8px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 10px; ORPHANS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(221,221,221); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT color=blue>ALTER TABLE Customer 
+rename to New_Customer ;</FONT></DIV></body>
+</html>

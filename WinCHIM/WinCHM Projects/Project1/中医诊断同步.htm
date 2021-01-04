@@ -1,0 +1,218 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>同步</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><FONT color=#ff0000>--1、科室同步，同步DEPARTMENT表</FONT><BR>USE [DBGocent]<BR>GO<BR>CREATE VIEW 
+[dbo].[YD_DEPARTMENTS]<BR>AS<BR>select b2ksno ID,b2ejnm Name,101 Sort,201 
+Mark,10 TotalChief,10 TotalAttend,10 TotalResident,10 TotalNurse,100 TotalBed,10 
+TotalExtra,<BR>(case when b2chk1='1' then '1' else '0' end) Valid<BR>from 
+DBGocent..bz02d&nbsp; WITH (NOLOCK)<BR>where 1=1<BR><FONT color=#ff0000>--2、科室病区匹配，同步DEPT2WARD表</FONT><BR>USE [DBGocent]<BR>GO<BR>CREATE 
+VIEW [dbo].[YD_DEPT2WARD]<BR>AS<BR>select F.b2ksno DeptID,z2bqxx WardID,200 
+TotalBed<BR>from DBGocent..zy02h a&nbsp; WITH (NOLOCK) inner join 
+DBGocent..bz02d F&nbsp; WITH (NOLOCK) on(a.z2comp=f.b2comp and&nbsp; 
+a.z2ksno=F.b2ejks) <BR>where 
+1=1<BR><FONT color=#ff0000>--3、员工对应科室匹配，同步USER2DEPT表</FONT><BR>USE [DBGocent]<BR>GO<BR>CREATE VIEW 
+[dbo].[YD_USER2DEPT]<BR>AS<BR>SELECT a.b1empn AS UserId,c.b2ksno as 
+DeptID,b.z2bqxx AS WardID<BR>FROM dbo.bz01h a <BR>LEFT JOIN zy02h b ON&nbsp; a.b1ksno =     
+  b.z2ksno<BR>LEFT JOIN bz02d c ON (b.z2comp=c.b2comp AND&nbsp; 
+b.z2ksno=c.b2ejks)<BR>WHERE c.b2ksno != '' AND b.z2bqxx != ''<BR> GO<BR><FONT color=#ff0000>--4、用户同步，同步USERS表</FONT><BR>USE 
+[DBGocent]<BR>GO<BR>CREATE&nbsp; VIEW [dbo].[YD_USERS]<BR>AS<BR>SELECT a.b1empn 
+ID,a.b1name Name,B1sexx Sexy,b1bird Birth,b1idno IDNo,b.b2ksno DeptId,<BR>b2bqnm 
+WardID,<BR>(CASE WHEN a.b1type='1' THEN '400' WHEN a.b1type='2' THEN '402' ELSE 
+'404' END) Category,<BR>(CASE WHEN a.b1posi IN('04','08') THEN '1' WHEN b1posi 
+IN('03','07') THEN '2' WHEN a.b1posi IN('02','05')THEN '3' WHEN a.b1posi 
+IN('01','05')THEN '4' ELSE '15' END) JobTitle,<BR>b1yscf RecipeMark,b1mzbz 
+NarcosisMark,<BR>(CASE WHEN a.b1posi IN('04') THEN '2000' WHEN a.b1posi&nbsp; 
+IN('03')&nbsp; THEN '2001' WHEN a.b1posi IN('02') THEN '2002' WHEN a.b1type 
+IN('2') THEN '2004' ELSE '2003' END) Grade,<BR>a.b1usex Valid<BR>FROM 
+DBGocent..bz01h a LEFT JOIN bz02d b ON (a.b1ksno=b2ejks) <BR>--WHERE a.b1empn 
+like '010008'<BR>--WHERE 1=1 and a.b1type in('2','1')AND b.b2ksno != 
+''<BR>--and&nbsp; a.b1udat&gt;'2018-06-13 10:24:50'&nbsp; <BR>--and a.b1empn= 
+ '010006'<BR><FONT color=#ff0000>--5、病区同步，同步WARDS表<BR></FONT>USE 
+[DBGocent]<BR>GO<BR>CREATE&nbsp; VIEW [dbo].[YD_WARDS]<BR>AS<BR>select bzkeyx as 
+ID,<BR>bzname as Name,<BR>'300'as Mark,<BR>'1' as valid <BR>from&nbsp; bztbd 
+wherebzcodn= 'BQ'<BR><FONT color=#ff0000>--6、病人同步，同步INPATIENT表<BR></FONT>USE [DBGocent]<BR>GO<BR>CREATE&nbsp;VIEW 
+[dbo].[YD_INPATIENT]<BR>AS<BR>SELECT&nbsp;&nbsp;&nbsp; -- CASE WHEN isnull(z1xxno, 0) !=    
+   1 THEN CONVERT(nvarchar(20), a.z1zyno) ELSE 
+CONVERT(nvarchar(20), CAST(a.z1zyno AS INT)) END 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CASE WHEN a.z1endv = '2.取消入院' THEN 
+RIGHT(a.z1zyno,8) ELSE CONVERT(NVARCHAR(20), a.z1zyno) END AS 
+patNoOfHis,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CONVERT(NVARCHAR(20), 
+a.z1mzno) AS NoOfClinic, <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CASE WHEN a.z1endv =   
+  '2.取消入院' THEN RIGHT(a.z1zyno,8) ELSE CONVERT(NVARCHAR(20), a.z1zyno) 
+END AS NoOfRecord,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CASE WHEN a.z1endv = 
+'2.取消入院' THEN RIGHT(a.z1zyno,8) ELSE CONVERT(NVARCHAR(20), a.z1zyno) END AS 
+PatId, <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CONVERT(NVARCHAR(20), 
+a.z1hznm) AS Name, (CASE WHEN z1lyjg IN ('0202') THEN 
+'01'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHEN z1lyjg IN ('0203') THEN 
+'02' <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHEN z1lyjg IN ('') THEN 
+'03' <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHEN z1lyjg IN ('4401', 
+'4402', '4403', '4501', '4601')&nbsp;&nbsp; THEN '04' 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WHEN z1lyjg IN ('0201')&nbsp; 
+THEN '07' <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ELSE '99' END) AS 
+PayID,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (CASE WHEN z1lyjg IN ('0202' ) 
+THEN 
+'城镇职工基本医疗保险'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('0203') THEN '城镇居民基本医疗保险' 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('03') THEN '新型农村合作医疗' 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('206') THEN '贫困救助' 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('05') THEN 
+'商业医疗保险'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('06') THEN 
+'全公费'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('0201') THEN 
+'全自费'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+WHEN z1lyjg IN ('08') THEN 
+'其他社会保险'<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ELSE '其他' END) AS Pact_Name<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+--(CASE WHEN z1lyjg IN ('0001', '0002', '0007', '0003', '0008') THEN 
+'城镇职工基本医疗保险' WHEN z1lyjg IN ('0007', '0009') 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+--THEN '城镇居民基本医疗保险' WHEN z1lyjg IN ('') THEN '新型农村合作医疗' WHEN z1lyjg IN ('4401', 
+'4402', '4403', '4501', '4601') THEN '贫困救助' WHEN z1lyjg IN ('0000') 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+--THEN '全自费' ELSE '其他' END) AS Pact_Name<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+,'1' AS Origin, '市区' AS source_name, 1 AS InCount, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(CASE WHEN a.z1sexx = '男性' THEN 1 WHEN a.z1sexx = '女性' THEN 2 WHEN a.z1sexx = 
+'其他' THEN 3 END) AS SexID, <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (CASE WHEN a.z1sexx =   
+  '男性' THEN '男' WHEN a.z1sexx = '女性' THEN '女' WHEN a.z1sexx = '其他' THEN 
+'其他' END)&nbsp; AS SexName,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+SUBSTRING(CONVERT(CHAR, a.z1bird, 120), 1, 10) 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+AS Birth, CONVERT(INT, a.z1agex) AS Age, CONVERT(NVARCHAR(20), a.z1agex + 
+a.z1flag) AS AgeStr, a.z1idno AS IDNO, a.z1mary AS mari, '45' AS JobID, '职员' AS 
+JobName, CONVERT(NVARCHAR(10), 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+a.z1csdx) AS ProvinceID, '' AS ProvinceName, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (CASE WHEN z1mary =                         '未婚' THEN '10' WHEN 
+z1mary = '已婚' THEN '20' WHEN z1mary = '离异' THEN '40' WHEN z1mary = '丧偶' THEN 
+'30' END) 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+AS Marital, a.z1csdx AS CountyID, '' AS countyname, 'HA' AS NationID, '' AS 
+NationName, 'cn' AS NationalityID, '' AS NationalityName, a.z1jgxx AS 
+Nativeplace_P, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+a.z1jgxx AS Nativeplace_C, CONVERT(NVARCHAR(32), a.z1dwmc) AS Organization, 
+a.z1hkdz AS OfficePlace, a.z1lxdh AS OfficeTEL, a.z1yzbm AS OfficePost, a.z1hkdz 
+AS NativeAddress, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+a.z1lxdh AS NativeTEL, a.z1yzbm AS NativePost, a.z1hkdz AS Address, a.z1lxrm AS 
+ContactPerson, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(CASE WHEN z1lxgx = '1' THEN '01' WHEN z1lxgx = '2' THEN '02' WHEN z1lxgx = '3' 
+THEN '03' ELSE '07' END) AS Relationship, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(CASE WHEN z1lxgx = '1' THEN '父子' WHEN z1lxgx = '2' THEN '母子' WHEN z1lxgx = '3' 
+THEN '夫妻' ELSE '亲朋好友' END) AS Rela_Name, a.z1lxdz AS ContactAddress, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+a.z1lxdz AS ContactOffice, a.z1mobi AS 
+ContactTEL,--电话号码<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a.z1yzbm AS 
+ContactPost, a.z1hznm AS Offerer, a.z1ybno AS SocialCare, a.z1ybno AS Insurance, 
+a.z1nbno AS CardNo, '3' AS AdmitInfo, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+F.b2ksno AS AdmitDept, a.z1bqxx AS AdmitWard, CONVERT(NVARCHAR(12), e.z1bedn) AS 
+AdmitBed, CASE WHEN ISNULL(z1xxno, 0) != 1 THEN SUBSTRING(CONVERT(CHAR, 
+g.z1date, 120), 1, 19) 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ELSE SUBSTRING(CONVERT(CHAR, a.z1date, 120), 1, 19) END AS AdmitDate, CASE WHEN 
+ISNULL(z1xxno, 0) != 1 THEN SUBSTRING(CONVERT(CHAR, g.z1date, 120), 1, 19) ELSE 
+SUBSTRING(CONVERT(CHAR, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+a.z1date, 120), 1, 19) END AS InWardDate, 
+--LEFT(j.zdname,20)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a.in_diag_code AS 
+AdmitDiagnosis, CONVERT(NVARCHAR(12), F.b2ksno) AS OutHosDept, 
+CONVERT(NVARCHAR(20), a.z1bqxx) AS OutHosWard, e.z1bedn AS OutBed, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+SUBSTRING(CONVERT(CHAR, a.z1ldat, 120), 1, 19) AS OutWardDate, 
+SUBSTRING(CONVERT(CHAR, a.z1ldat, 120), 1, 19) AS OutHosDate, NULL AS 
+OutDiagnosis, '' AS TotalDays, NULL 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+AS ClinicDiagnosis, (CASE WHEN ISNULL(z1rytj, '1') = '急诊' THEN '1' WHEN 
+ISNULL(z1rytj, '1') = '门诊' THEN '2' WHEN ISNULL(z1rytj, '1') = '转入' THEN '3' 
+WHEN ISNULL(z1rytj, '1') 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+= '其他' THEN '9' END) AS AdmitWay, '' AS OutWay, '' AS ClinicDoctor, '' AS 
+ClinicDoctorName, e.z1ysno AS Resident, e.z1ysnm AS ResidentName, e.z1ysno AS 
+Attend, e.z1ysnm AS AttendName, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'' AS Chief, e.z1zrys AS ChiefName, (CASE WHEN e.z1endv = '2.已入科' THEN 1501 WHEN 
+e.z1endv = '8.已出院' THEN 1503 WHEN a.z1endv = '2.取消入院' THEN 1509 END) AS Status, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'' AS statusname, (CASE WHEN c.b9kind4 = '08' THEN '2' WHEN c.b9kind4 = '09' 
+THEN '1' ELSE '0' END) AS CriticalLevel, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(CASE WHEN c.b9kind4 = '08' THEN '重危病人' WHEN c.b9kind4 = '09' THEN '病重病人' ELSE 
+'一般病人' END) AS CriticalLevelName, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(CASE WHEN d .b9kind4 = '04' THEN '4' WHEN d .b9kind4 = '05' THEN '1' WHEN d 
+.b9kind4 = '06' THEN '2' ELSE '3' END) AS AttendLevel, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(CASE WHEN d .b9kind4 = '04' THEN '特别护理' WHEN d .b9kind4 = '05' THEN '一级护理' WHEN 
+d .b9kind4 = '06' THEN '二级护理' ELSE '三级护理' END) AS AttendLevelName, 0 AS IsBaby, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+0 AS Mother, '' AS MedicareID, '0' AS Style, NULL AS OutWardBed, a.z1hkdz AS 
+csdaddress, a.z1hkdz AS jgaddress, a.z1hkdz AS xzzaddress, a.z1hkdz AS 
+hkaddress, a.z1lxdh AS xzztel, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+CONVERT(VARCHAR, a.z1amt2) AS 
+fyze<BR>FROM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dbo.zy01h AS a WITH 
+(NOLOCK) INNER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.zy02h AS b WITH (NOLOCK) ON a.z1comp = b.z2comp AND a.z1ksno = b.z2ksno LEFT 
+OUTER JOIN <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --dbo.YD_RYZD AS j ON 
+a.z1zyno = j.id LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.YD_CriticalLevel AS c&nbsp; WITH (NOLOCK) ON a.z1comp = c.z4comp AND 
+a.z1zyno = c.zybah AND a.z1ghno = c.z4ghno LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.YD_AttendLevel AS d WITH (NOLOCK) ON a.z1comp = d.z4comp AND a.z1zyno = 
+d.zybah AND a.z1ghno = d.z4ghno INNER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.zy01d AS e&nbsp; WITH (NOLOCK) ON a.z1comp = e.z1comp AND a.z1zyno = 
+e.z1zyno AND a.z1ghno = e.z1ghno INNER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.bz02d AS F WITH (NOLOCK) ON a.z1comp = b.z2comp AND a.z1ksno = F.b2ejks 
+INNER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.YD_pat AS g WITH (NOLOCK) ON a.z1comp = g.z1comp AND a.z1zyno = g.z1zyno AND 
+a.z1ghno = g.z1ghno&nbsp;<BR>WHERE&nbsp;&nbsp;&nbsp;&nbsp; (1 = 1) AND (e.z1endv 
+= '2.已入科' OR e.z1endv = '8.已出院' OR a.z1endv = 
+'2.取消入院')--三种状态，已入科1501，出院1503，销号1509<BR>AND (DATEDIFF(DAY, 
+ISNULL(a.z1jsrq,GETDATE()), GETDATE()) &lt;= 30)--结算日期小于<BR>AND 
+a.z1date&gt;=  '2018-12-21 11:00:00'--入院日期大于<BR><FONT color=#00ff00>---------------------------------------附加同步---------------------------------------------------------------------&lt;  
+/FONT&gt; <BR><FONT color=#ff0000>--6、his创建中医诊断视图，同步diagnosisofchinese表</FONT><BR><FONT color=#000000>USE [DBGocent]<BR>GO<BR>CREATE VIEW 
+[dbo].[YD_ZYZDBM]<BR>AS<BR>SELECT a.baicdn AS ID,a.baicdn AS MAPID,a.baicnm AS 
+NAME,a.bapymx AS PY,<BR>a.bawbmx AS WB,a.bausex AS VALID,'' AS MEMO,''AS MEMO1, 
+<BR>CASE a.baflag WHEN 'Z' THEN 'b' WHEN '1' THEN 'z' END AS CATEGORY<BR>FROM 
+dbo.bz10h a WHERE baflag IN ('Z','1')<BR> GO</FONT> <BR><FONT color=#ff0000>--7、用户转科同步，同步users表<BR></FONT></FONT><FONT color=#00ff00><FONT color=#000000>ALTER&nbsp; VIEW 
+[dbo].[YD_USERSWardID]<BR>AS<BR>select a.b1empn ID,a.b1name 
+Name,left(a.b1ksno,10) DeptId,b.z2bqxx WardID,<BR>case when b1posi='04' then 
+'2000' when b1posi='02' then '2002' when b1posi='03' then '2001' else '2003' end 
+grade --医生级别<BR>from bz01h a<BR>left join zy02h b on a.b1ksno=b.z2ksno<BR>where 
+--b.z2bqxx is not null <BR>a.b1empn like'01%'</FONT> <BR><FONT color=#ff0000>--8、西医诊断同步，同步DIAGNOSIS表</FONT><BR><FONT color=#000000>create VIEW 
+YD_XYZDBM<BR>AS<BR>SELECT <BR>a.baicdn AS markid,<BR>a.baicdn AS 
+icd,<BR>a.baicdn AS mapid,<BR>'' as standardcode,<BR>a.baicnm AS 
+NAME,<BR>a.bapymx AS PY,<BR>a.bawbmx AS WB,<BR>'' as tumorid,<BR>'' as 
+statist,<BR>'' as innercategory,<BR>'' as category,<BR>'' as 
+othercategroy,<BR>a.bausex AS VALID,<BR>'' as memo<BR>FROM dbo.bz10h a WHERE baflag = 'X' 
+<  
+  /FONT >    
+  </P></FONT></body>
+</html>

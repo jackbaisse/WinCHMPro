@@ -1,0 +1,28 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>通过日志还原</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>BACKUP database DBGocent TO DISK='D:\数据库\DBGocent.bak' WITH FORMAT&nbsp; 
+--备份数据库</P>
+<P>drop table bz10h --删除表</P>
+<P>SELECT dt=GETDATE() INTO #1 --删除表时间</P>
+<P>BACKUP LOG DBGocent TO DISK='D:\数据库\DBGocent_log.bak' WITH FORMAT --备份日志</P>
+<P>RESTORE DATABASE DBGocent FROM DISK='D:\数据库\DBGocent.bak' WITH 
+REPLACE,NORECOVERY&nbsp;&nbsp; --还原备份</P>
+<P>--通过日志还原数据<BR>DECLARE @dt datetime<BR>SELECT @dt=DATEADD(ms,-1200,dt) FROM 
+#1&nbsp; --获取比表被删除的时间略早的时间<BR>RESTORE LOG DBGocent FROM 
+DISK='D:\数据库\DBGocent_log.bak' WITH RECOVERY,STOPAT=@dt</P></body>
+</html>

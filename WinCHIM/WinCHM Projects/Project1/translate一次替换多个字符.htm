@@ -1,0 +1,39 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>translate一次替换多个字符</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1.translate 
+与replace类似是替换函数，但translate是一次替换多个单个的字符。<BR>2.基本用法，字符对应替换。<BR>例子：<BR>select 
+translate('1234567','123' ,'abc') from dual ;--1替换为a,2替换为b,3替换为c<BR>结果：abc4567 
+。<BR>3.如果 没有对应字符则替换为null;<BR>select translate('1234567','123' ,'ab') from 
+dual；--3替换为null;<BR>结果：ab4567.<BR>4.如果对应字符过多，不影响<BR>select 
+translate('1234567','123' ,'abccd') from dual；<BR>结果：abc4567<BR>5.如果替换字符整个为空字符 
+，则直接返回null</P>
+<P>select translate('1234567','123' ,'') from 
+dual；<BR>结果：null;<BR>6.如果想筛掉对应字符，应传入一个不相关字符，同时替换字符也加一个相同字符；<BR>select 
+translate('1234567','&amp;123' ,'&amp;') from 
+dual;<BR>结果：4567；<BR>7,如果相同字符对应多个字符，按第一个；<BR>select translate('12334567','1233' 
+,‘abcd') from 
+dual;<BR>结果：abcc4567;<BR>8,如果想保留某些特定字符筛选掉其他的，比如筛掉汉字保留数字<BR>&nbsp;&nbsp; 
+先把数字筛选掉，<BR>select translate('你师看了3三楼2的6开8发','#0123456789' ,'#') from 
+dual<BR>再用筛选出的汉字去筛选原来的语句留下数字，<BR>select 
+translate('你师看了3三楼2的6开8发','#'||translate('你师看了3三楼2的6开8发','#0123456789' 
+,'#'),'#') from 
+dual；<BR>结果：3268；<BR>9，还有其他灵活用法，比如我可以判断两个字符串如果：字符串都是数字字符，然后数字字符的顺序不同，且每个字符只出现一次，<BR>我可以判断他们包含的数字是不是完全一致；<BR>比如比较123 
+和132；<BR>select 1&nbsp; from dual where<BR>&nbsp;translate('0123456789','123' 
+,'aaaaaaaaaa') =translate('0123456789','132' ,'aaaaaaaaaa')<BR>结果：1 
+，也就是where中的等式成立；</P></body>
+</html>

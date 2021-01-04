@@ -1,0 +1,320 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>老库升级</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body><!--StartFragment -->
+<DIV>select&nbsp;*&nbsp;from&nbsp;emrtemplet;--通用模板<BR>select&nbsp;*&nbsp;from&nbsp;TEMPLET2HISDEPT;--科室匹配<BR>select&nbsp;*&nbsp;from&nbsp;EMRDEPT2HIS;&nbsp;--配对科室<BR>select&nbsp;*&nbsp;from&nbsp;template_person;&nbsp;--另存为的模板<BR>select&nbsp;*&nbsp;from&nbsp;emrtemplet_item_person;&nbsp;&nbsp;--右边的小模板<BR>select&nbsp;*&nbsp;from&nbsp;emrtemplet_item_person_catalog;&nbsp;--右边的小模板节点<BR>select&nbsp;*&nbsp;from&nbsp;department;--科室<BR>select&nbsp;*&nbsp;from&nbsp;ward;--病区<BR>select&nbsp;*&nbsp;from&nbsp;dept2ward;--科室病区对照<BR>select&nbsp;*&nbsp;from&nbsp;users;--用户<BR>select&nbsp;*&nbsp;from&nbsp;diagnosis;--诊断<BR>select&nbsp;*&nbsp;from&nbsp;operation;--&nbsp;手术<BR>select&nbsp;*&nbsp;from&nbsp;DIAGNOSISOFCHINESE;--中医诊断<BR>select&nbsp;*&nbsp;from&nbsp;toxicosis&nbsp;;--损伤中毒<BR>select&nbsp;*&nbsp;from&nbsp;diagnosis_xt_bj;--病理诊断<BR>select&nbsp;*&nbsp;from&nbsp;there_check_event;--三测单状态<BR>select * from emrreport;--自定义报表</DIV>
+<DIV>select 
+* from DEPTREP;鉴别诊断表<BR><BR>select&nbsp;*&nbsp;from&nbsp;dateelement;--数据元<BR>select&nbsp;*&nbsp;from&nbsp;commonnote;--护理记录表格名称<BR>select&nbsp;*&nbsp;from&nbsp;commonnote_tab;--护理记录表格基本信息<BR>select&nbsp;*&nbsp;from&nbsp;commonnote_item;----护理记录表格需要哪些列信息</DIV><DIV>&nbsp;</DIV>
+<DIV>--select*from IEM_BASICINFOZY_DEFAULT;--首页默认值表</DIV>
+<DIV>select * from hospitalinfo ;--护理记录单医院默认值表<BR><BR>-----不兼容老数据的切换----<BR>exp&nbsp;yidandba/sa@emr&nbsp;file=E:/jjxx.dmp&nbsp;log=E:/jjxx.log&nbsp;tables=(emrtemplet,TEMPLET2HISDEPT,EMRDEPT2HIS,template_person,emrtemplet_item_person,emrtemplet_item_person_catalog,department,ward,dept2ward,users,diagnosis,operation,DIAGNOSISOFCHINESE,toxicosis,diagnosis_xt_bj,there_check_event,dateelement,<BR>commonnote,commonnote_tab,commonnote_item,hospitalinfo,DEPTREP)</DIV>
+<DIV>-----医生权限更改------</DIV>
+<DIV>  update usersset 
+jobid=replace(jobid,'33,','1111,')--医生</DIV>
+<DIV>  update users set 
+jobid=replace(jobid,'66,','00,')--管理员<BR>update users set 
+jobid=replace(jobid,'22,','44,')  where  jobid like 
+'%22,%'--医务处</DIV> -------拷report文件-----<BR>
+<DIV></DIV>
+<DIV><BR>------首页必填项更新--------<BR>update Iemzy_Needitem a set 
+isneed=(select isneed from <A 
+href="mailto:Iemzy_Needitem@Nydba">Iemzy_Needitem@Nydba</A> b where 
+b.id=a.id&nbsp; )<BR>where exists(select 1 from <A 
+href="mailto:Iemzy_Needitem@Nydba">Iemzy_Needitem@Nydba</A> b where 
+a.id=b.id)</DIV>
+<DIV>-------是否显示/关闭老库-----------------</DIV>
+<DIV>select * from appcfg where 
+configkey='ISHistoryInpatient';</DIV>
+<DIV>update appcfg&nbsp; set value='1' where 
+configkey='ISHistoryInpatient';<BR>commit;</DIV>
+<DIV>--------默认科室----------</DIV>
+<DIV>merge into user2dept a using(select id,deptid,wardid 
+from users where wardid is not null) b on (a.userid = b.id)<BR>   
+        
+  whenmatchedthenupdateseta.deptid=b.deptid,a.wardid=b.wardid<BR>when not matched then 
+insert(a.userid,a.deptid,a.wardid) 
+values(b.id,b.deptid,b.wardid)</DIV>
+<DIV>    
+ 
+———————老库模板缺失处理———————————————</DIV>
+<DIV>&nbsp;--1\临时表<BR>&nbsp;Create Global Temporary Table 
+temp_template_person&nbsp; On Commit Preserve Rows as select * from <A 
+href="mailto:template_person@nydba">template_person@nydba</A>;&nbsp; 
+<BR>&nbsp;<BR>&nbsp;--select * from temp_template_person a where not 
+exists(select 1 from template_person b where a.id=    
+ 
+b.id)</DIV>
+<DIV>--2、<BR>--insert into template_person(<BR>&nbsp; id 
+,<BR>templateid,<BR>&nbsp; name,<BR>&nbsp; userid,<BR>&nbsp; valid,<BR>&nbsp; 
+content,<BR>&nbsp; sortid,<BR>&nbsp; sortmark,<BR>&nbsp; sharedid,<BR>&nbsp; 
+memo,<BR>&nbsp; py,<BR>&nbsp; wb,<BR>&nbsp; type,<BR>&nbsp; 
+isconfigpagesize,<BR>&nbsp; deptid,<BR>&nbsp; examine<BR>) select <BR>&nbsp; 
+id,<BR>&nbsp; templateid,<BR>&nbsp; name,<BR>&nbsp; userid ,<BR>&nbsp; 
+valid,<BR>&nbsp; content,<BR>&nbsp; sortid,<BR>&nbsp; sortmark,<BR>&nbsp; 
+sharedid,<BR>&nbsp; memo,<BR>&nbsp; py,<BR>&nbsp; wb,<BR>&nbsp; type,<BR>&nbsp; 
+isconfigpagesize,<BR>&nbsp; 
+deptid,'1' from temp_template_person a where not exists(select 1 from 
+template_person b where 
+a.id=b.id)<BR>2、-------------------------<BR>--1\临时表<BR>&nbsp;--1、    
+ 
+</DIV>
+<DIV>Create Global Temporary Table temp_emrtemplet&nbsp; On 
+Commit Preserve Rows as select * from <A 
+href="mailto:emrtemplet@nydba">emrtemplet@nydba</A>;&nbsp;<BR>&nbsp;<BR>&nbsp;select 
+* from temp_emrtemplet a where not exists(select 1 from emrtemplet b where 
+a.templet_id=b.templet_id)    
+ 
+</DIV>
+<DIV>--2、<BR>&nbsp;insert into 
+emrtemplet(<BR>&nbsp;<BR>&nbsp;templet_id ,<BR>&nbsp; file_name,<BR>&nbsp; 
+dept_id,<BR>&nbsp; creator_id,<BR>&nbsp; create_datetime,<BR>&nbsp; 
+last_time,<BR>&nbsp; permission,<BR>&nbsp; mr_class,<BR>&nbsp; 
+mr_code,<BR>&nbsp; mr_name,<BR>&nbsp; mr_attr,<BR>&nbsp; qc_code,<BR>&nbsp; 
+new_page_flag,<BR>&nbsp; file_flag,<BR>&nbsp; write_times,<BR>&nbsp; 
+code,<BR>&nbsp; hospital_code,<BR>&nbsp; xml_doc,<BR>&nbsp; 
+xml_doc_new,<BR>&nbsp; py ,<BR>&nbsp; wb ,<BR>&nbsp; isfirstdaily,<BR>&nbsp; 
+isshowfilename,<BR>&nbsp; isyihuangoutong,<BR>&nbsp; new_page_end,<BR>&nbsp; 
+valid,<BR>&nbsp; state,<BR>&nbsp; auditor,<BR>&nbsp; auditdate,<BR>&nbsp; 
+isconfigpagesize,<BR>&nbsp; isset,<BR>&nbsp; 
+ordeid<BR>&nbsp;<BR>&nbsp;)<BR>select    
+ 
+</DIV>
+<DIV>&nbsp; templet_id,<BR>&nbsp; 
+substr(file_name,1,13),<BR>&nbsp; dept_id,<BR>&nbsp; creator_id,<BR>&nbsp; 
+create_datetime,<BR>&nbsp; last_time,<BR>&nbsp; permission,<BR>&nbsp; 
+mr_class,<BR>&nbsp; mr_code,<BR>&nbsp; mr_name,<BR>&nbsp; mr_attr,<BR>&nbsp; 
+qc_code,<BR>&nbsp; new_page_flag,<BR>&nbsp; file_flag,<BR>&nbsp; 
+write_times,<BR>&nbsp; code ,<BR>&nbsp; hospital_code,<BR>&nbsp; 
+xml_doc,<BR>&nbsp; xml_doc_new,<BR>&nbsp; py,<BR>&nbsp; wb ,<BR>&nbsp; 
+isfirstdaily,<BR>&nbsp; isshowfilename,<BR>&nbsp; isyihuangoutong,<BR>&nbsp; 
+new_page_end,<BR>&nbsp; valid,<BR>&nbsp; state,<BR>&nbsp; auditor,<BR>&nbsp; 
+auditdate,<BR>&nbsp; isconfigpagesize,'1','1'    
+ 
+</DIV>
+<DIV>&nbsp;from temp_emrtemplet a where not exists(select 1 
+from emrtemplet b where a.templet_id=b.templet_id)    
+ 
+</DIV>
+<DIV>-------麻醉方式------------ <BR>select * from bzbjd where 
+bzcodn='02454'<BR>delete bzbjd where bzcodn='02454'    
+ 
+</DIV>
+<DIV>insert into 
+bzbjd(bzcomp,bzcodn,bzkeyx,bzname)<BR>select '1','02454',id,name from <A 
+href=       
+    "mailto:ANESTHESIA@nydba">ANESTHESIA@nydba</A> 
+<BR>----------个人模板----------------------    
+ 
+</DIV>
+<DIV>1、入院记录    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AB' and 
+name not like '入院记录--%' and name like '入院记录-%'<BR>update template_person set 
+name=replace(name,'入院记录-','入院记录--')&nbsp; where sortid='AB' and name not like 
+'入院记录--%' and name like '入院记录-%'    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AB' and 
+name not like '入院记录--%' and name like '入院记录%'<BR>update template_person set 
+name=replace(name,'入院记录','入院记录--') where sortid='AB' and name not like '入院记录--%' 
+and name like '入院记录%'    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AB' and 
+name not like '入院记录--%'<BR>update template_person set name='入院记录--'||name where 
+sortid='AB' and name not like '入院记录--%'    
+ 
+</DIV> 2、首程 
+<DIV></DIV>
+<DIV>select * from template_person where sortid='AC' and 
+isconfigpagesize='0' and name not like '首次病程--%' and name like '首次病程%'<BR>update template_person set 
+name= 
+replace(name,'首次病程','首次病程--') where sortid='AC' and isconfigpagesize=  
+   '0'and name 
+notlike '首次病程--%' and name like '首次病程%'    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AC' and 
+isconfigpagesize= '0' and name not like '首次病程--%'&lt;BR&gt;updatetemplate_person set 
+name=       
+'首次病程--'||name where sortid= 'AC' and isconfigpagesize=      '0' 
+and     namenot like '首次病程--%&lt; FONT 
+color= 
+         
+#ff0000&gt; 
+        
+       &lt;       
+ 
+        
+       BR&gt;&nbsp;   
+     
+ 
+      
+          
+     
+&lt; 
+        
+       BR&gt;   
+     
+ 
+      
+          
+     
+ 
+          
+     
+3、日常   
+     
+         
+ 
+   
+     
+     &lt;    
+ 
+ 
+          
+     
+/FONT&gt; 
+          
+     
+   
+     
+         
+ 
+   
+     
+         
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AC' and 
+isconfigpagesize='1' and name not like '日常病程--%' and name like '日常病程%'<BR>update template_person set 
+name=replace(name,'日常病程','日常病程--') where sortid= 
+  'AC' and isconfigpagesize=   
+   '1'and name 
+notlike '日常病程--%' and name like '日常病程%'    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AC' and 
+isconfigpagesize='1' and name not like '日常病程--%' and name not like '上级医师查房--%' 
+and name like '上级医师查房%'<BR>update template_person set name=   
+ replace(name,'上级医师查房','上级医师查房--') where 
+sortid='AC' and isconfigpagesize=  
+ '1' and 
+name not like '日常病程--%'and name 
+notlike '上级医师查房--%' and name like '上级医师查房%'    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AC' and 
+isconfigpagesize='1' and name not like '日常病程--%' and name not like 
+'上级医师查房--%'<BR>update template_person set 
+name='日常病程--'||name where sortid=   'AC' and isconfigpagesize=   
+'1'  and name not 
+like'日常病程--%' and name not like '上级医师查房--%'    
+ 
+</DIV>
+<DIV>    
+ 
+</DIV>
+<DIV>--------通用模板--------------    
+ 
+</DIV>
+<DIV>1、入院记录    
+ 
+</DIV>
+<DIV>select * from emrtemplet where mr_class='AB' and 
+mr_name ='入院记录'<BR>update emrtemplet set 
+mr_name=replace(mr_name,'入院记录','入院记录--'||templet_id) where mr_class='AB' and 
+mr_name ='入院记录'    
+ 
+</DIV>
+<DIV>select * from emrtemplet where mr_class='AB' and 
+mr_name not like '入院记录--%' and mr_name like '入院记录%'<BR>update emrtemplet set 
+mr_name=replace(mr_name,'入院记录','入院记录--') where mr_class='AB' and mr_name not 
+like '入院记录--%' and mr_name like '入院记录%'    
+ 
+</DIV>
+<DIV>select * from emrtemplet where mr_class='AB' and 
+mr_name not like '入院记录--%'<BR>update emrtemplet set mr_name='入院记录--'||mr_name 
+where mr_class='AB' and mr_name not like '入院记录--%'    
+ 
+</DIV>
+<DIV>2、首程<BR>select * from emrtemplet where mr_class='AC' 
+and isconfigpagesize= '1' and mr_name not like'%--%'<BR>update emrtemplet set 
+mr_name= '首次病程--'||mr_name where mr_class='AC' 
+and isconfigpagesize= '1' and mr_name not like'%--%'    
+ 
+</DIV>
+<DIV>select * from emrtemplet where mr_class='AC' and 
+isconfigpagesize= '0' and mr_name not like'%--%'<BR>update emrtemplet set 
+mr_name= '日常病程--'||mr_name where mr_class='AC' 
+and isconfigpagesize= '0' and mr_name not like'%--%'    
+ 
+</DIV>&lt; DIV&gt; 
+<DIV></DIV>
+<DIV>    
+ 
+</DIV>
+<DIV>    
+ 
+</DIV>
+<DIV>select * from emrtemplet where mr_class='AB' and 
+mr_name not like '入院记录--%'<BR>select * from emrtemplet where mr_class='AB' and 
+mr_name not like '_____-%' and mr_name like '入院记录-%'<BR>select * from emrtemplet 
+where mr_class='AB' and mr_name like '入院记录—%'<BR>select * from emrtemplet where 
+mr_class='AB' and mr_name ='入院记录'    
+ 
+</DIV>
+<DIV>select * from emrtemplet where mr_class='AB' and 
+mr_name ='入院记录'<BR>update emrtemplet set 
+mr_name=replace(mr_name,'入院记录','入院记录--'||templet_id) where mr_class='AB' and 
+mr_name ='入院记录'<BR>update emrtemplet set mr_name='入院记录--'||mr_name where 
+mr_class='AB' and mr_name not like '入院记录--%'    
+ 
+</DIV>
+<DIV>select * from template_person where sortid='AB' and 
+name not like '入院记录--%'<BR>select * from template_person where sortid='AB' and 
+name like '入院记录.%'<BR>select * from template_person where sortid='AB' and name 
+not like '_____-%' and name like '入院记录-%'<BR>select * from template_person where 
+sortid='AB' and name not like '____--%' and name like '入院记录%'<BR>update 
+template_person set name=replace(name,'入院记录','入院记录--') where sortid='AB' and 
+name not like '____--%' and name like '入院记录%'<BR>update 
+template_person set name='入院记录--'||name where sortid='AB' and name not like 
+'入院记录--%'<BR>-------费用------------------    
+ 
+</DIV>
+<DIV>1、费用视图    
+ 
+</DIV>
+<DIV>2、老库<BR> union all&nbsp; select * 
+from [192.168.42.33].[DBGocent].[dbo].[YD_IEMFEEINFOZY]</DIV>
+<DIV>3、设置为只读模板</DIV>
+<DIV>update template_person set sortmark='1' where 
+sortid='AC' and isconfigpagesize= '0'</DIV>
+<DIV>4、检查体温单</DIV>
+<DIV>   5、病案首页编码、默认值表 select*from 
+IEM_BASICINFOZY_DEFAULT;</DIV>
+<DIV>     
+       
+   
+       6、老系统出院时间<BR></DIV>
+<DIV></DIV>
+<DIV>    
+ 
+</DIV>
+<DIV>    
+ 
+&nbsp;</DIV></body>
+</html>

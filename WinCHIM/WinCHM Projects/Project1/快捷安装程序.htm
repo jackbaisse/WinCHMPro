@@ -1,0 +1,52 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>快捷安装程序</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>@echo off<BR>color 2e <BR>Pushd %~dp0<BR>rem 判断64位系统和32位系统<BR>if /i 
+%PROCESSOR_IDENTIFIER:~0,3%==x86 (<BR>&nbsp;echo 32位操作系统<BR>Set 
+b=%SystemRoot%\system32<BR>) else (<BR>&nbsp;echo 64位操作系统<BR>Set 
+b=%SystemRoot%\SysWOW64<BR>)<BR>Rd "%b%\test_permissions" &gt;nul 2&gt;nul<BR>Md 
+"%b%\test_permissions" 2&gt;nul||(Echo 请以右键管理员身份运行!&amp;&amp;Pause 
+&gt;nul&amp;&amp;Exit)<BR>Rd "%b%\test_permissions" &gt;nul 2&gt;nul<BR>ping -n 
+2 127.0.0.1&gt;nul<BR>ping -n 5 127.0.0.1&gt;nul<BR>if errorlevel 0 (<BR>echo 
+创建目录成功！<BR>)else(<BR>goto :end<BR>)<BR>net use <A 
+href="file://\\192.168.42.241">\\192.168.42.241</A> /user:administrator <A 
+href="mailto:xj@123">xj@123</A><BR>if /i %PROCESSOR_IDENTIFIER:~0,3%==x86 
+(<BR>xcopy <A href="file://\\192.168.42.241\">\\192.168.42.241\</A>安装工具\64位系统 /s 
+D:\新程序<BR>) Else (<BR>xcopy <A 
+href="file://\\192.168.42.241\">\\192.168.42.241\</A>安装工具\32位系统 /s 
+D:\新程序<BR>)<BR>echo //从服务器上下载成功！<BR>set 
+lj=D:\新程序\EEPNetClient\OracleRun\HelloEmr.exe<BR>set lnkname=电子病历<BR>set 
+zmlj=<BR>set desc=emr<BR>if not defined zmlj goto:GetWorkDir "%lj%"<BR>(echo Set 
+WshShell=CreateObject("WScript.Shell"^)<BR>echo 
+strDesKtop=WshShell.SpecialFolders("DesKtop"^)<BR>echo Set 
+oShellLink=WshShell.CreateShortcut(strDesKtop^&amp;"\%lnkname%.lnk"^)<BR>echo 
+oShellLink.TargetPath="%lj%"<BR>echo 
+oShellLink.WorkingDirectory="%zmlj%"<BR>echo oShellLink.WindowStyle=1<BR>echo 
+oShellLink.Description="%desc%"<BR>echo oShellLink.Save)&gt;makelnk.vbs<BR>echo 
+//桌面快捷方式创建成功！</P>
+<P>makelnk.vbs<BR>del /f /q makelnk.vbs<BR>:GetWorkDir<BR>set zmlj=%~dp1<BR>set 
+zmlj=%zmlj:~,-1%<BR>set lj=D:\新程序\EEPNetClient\EEPNetClient.exe<BR>set 
+lnkname=医院管理信息系统<BR>set desc=HIS<BR>(echo Set 
+WshShell=CreateObject("WScript.Shell"^)<BR>echo 
+strDesKtop=WshShell.SpecialFolders("DesKtop"^)<BR>echo Set 
+oShellLink=WshShell.CreateShortcut(strDesKtop^&amp;"\%lnkname%.lnk"^)<BR>echo 
+oShellLink.TargetPath="%lj%"<BR>echo 
+oShellLink.WorkingDirectory="%zmlj%"<BR>echo oShellLink.WindowStyle=1<BR>echo 
+oShellLink.Description="%desc%"<BR>echo oShellLink.Save)&gt;makelnk.vbs<BR>echo 
+//桌面快捷方式创建成功！<BR>makelnk.vbs<BR>del /f /q makelnk.vbs<BR>:end<BR>echo 
+2秒后退出<BR>ping -n 2 127.0.0.1&gt;nul<BR>pause<BR>exit</P></body>
+</html>

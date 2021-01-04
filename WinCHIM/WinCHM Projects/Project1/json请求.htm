@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>json请求</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P><FONT color=#ff0000>httpwebrequest</FONT> req 
+=(httpwebrequest)webrequest.create<FONT color=#000000> 
+ ( 
+<FONT color=#ff0000><FONT color=#000000>  url);//引入system.net  --数据请求<BR><FONT color=#000000>stream stream 
+= req.getresponse().getresponsestream();//引入system.io&nbsp; 
+--数据响应<BR>streamreader reader = new 
+streamreader(stream);<BR>String content = 
+reader.ReadToEnd();--读取数据流<BR>JavaScriptSerializer jsonTool = new 
+JavaScriptSerializer();//右键引入解析工具-&gt;添加引用-&gt;system.web.extensions，--序列化<BR>List&lt;User&gt; list = 
+jsonTool.Deserizlize&lt;List&lt;<FONT color=#ff0000>User</FONT>&gt;&gt;(content);//实体类,反序列化<BR>//数据填充页面<BR>DataTable dt = 
+new 
+dataTable();<BR>dt.columns.add("id");<BR>dt.columns.add("name");<BR>dt.columns.add("email");<BR><FONT color=#ff0000>list.foreach(u =&gt;<BR>{<BR>var row = 
+dt.newrow();<BR>row["id"] =          u.id;<BR>row["name"] =  u.name;<BR>row["email"] = 
+u.email;<BR>dt.rows.add(row);<BR>});--lamaber表达式</FONT></FONT></P>
+<P><FONT color=#000000>datagridview.datasource=dt</FONT></P></FONT></FONT></FONT></body>
+</html>

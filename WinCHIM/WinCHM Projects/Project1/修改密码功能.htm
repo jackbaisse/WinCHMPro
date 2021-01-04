@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>修改密码功能</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1.验证输入框密码，$.post()&nbsp;&nbsp;发起用户请求</P>
+<P>$("#btnEp").click(function(){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+var password&nbsp; = 
+$("#txtNewPass").val();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var password2 = 
+$("#txtRePass").val();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if($.trim(password)==""){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp; 
+//$.messager.alert('警告','新密码不能为空或者空白字符！','warning');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp; $.messager.alert('警告','密码不能为空 
+','warning');<BR>&nbsp;&nbsp;&nbsp;return 
+;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if($.trim(password) != 
+$.trim(password2)){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp; 
+$.messager.alert('警告','再次密码不一致','warning');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;return ;<BR>&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P> //&nbsp;&nbsp;<FONT color=#ff0000>user为action.xml中配置的name属性</FONT>，<FONT color=#0000ff>editpassword为actionn层中的业务方法</FONT></P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var 
+url = "${pageContext.request.contextPath}/<FONT color=#ff0000>user</FONT>_<FONT color= #0000ff > 
+editpassword.action";<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<FONT color=#000000> $.post(url, 
+{"password": password}, function(data 
+   
+){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;if(data.result == 
+"success"){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;$.messager.alert("信息",data.<FONT color=#ff0000>mag</FONT>,"info");//<FONT color=#ff0000>mag为action中map返回的值</FONT> 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;$.messager.alert("信息",data.mag,"info");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;$('#editPwdWindow').window('close');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;});//回调函数提示成功还是失败<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+});<BR>&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;});</FONT></P>
+<P><FONT color=#000000>2.action层中定义方法</FONT></P>
+<P><FONT color=#000000>public String 
+editpassword(){<BR>&nbsp;&nbsp;Users loginuser = (Users) 
+ServletActionContext.getRequest().getSession().getAttribute("user");//获取用户<BR>&nbsp;&nbsp;user.setId(loginuser.getId());//获取用户id<BR>&nbsp;&nbsp;try 
+{<BR>&nbsp;&nbsp;&nbsp;userService.<FONT color=#ff0000>editpassword</FONT>(user);//<FONT color=#ff0000>editpassword调用services层接口方法</FONT><BR>&nbsp;&nbsp;&nbsp;Map&lt;String, 
+Object&gt; map =new HashMap&lt;String, 
+Object&gt;();<BR>&nbsp;&nbsp;&nbsp;map.put("result", 
+"success");<BR>&nbsp;&nbsp;&nbsp;map.put("mag", 
+"修改密码成功");<BR>&nbsp;&nbsp;&nbsp;ActionContext.getContext().put("map", 
+map);<BR>&nbsp;&nbsp;} catch (Exception e) {<BR>&nbsp;&nbsp;&nbsp;Map&lt;String, 
+Object&gt; map =new HashMap&lt;String, 
+Object&gt;();<BR>&nbsp;&nbsp;&nbsp;map.put("result", 
+"failure");<BR>&nbsp;&nbsp;&nbsp;map.put("mag", "修改密码失败"+ 
+e.getMessage());<BR>&nbsp;&nbsp;&nbsp;ActionContext.getContext().put("map", 
+map);<BR>&nbsp;&nbsp;}<BR>&nbsp;&nbsp;return 
+"editpasswordSuccess";<BR>&nbsp;}</FONT></P>
+<P><FONT color=#000000>3.定义services层接口</FONT></P>
+<P><FONT color=#000000>public void <FONT color=#ff0000>editpassword</FONT>(Users user);</FONT></P>
+<P><FONT color=#000000>4.实现services接口</FONT></P>
+<P><FONT color=#000000>public void <FONT color=#ff0000>editpassword</FONT>(Users user) {<BR>&nbsp;&nbsp;Users edit = 
+genericDao.findfly(user.getId());//调用通用接口查询方法<BR>&nbsp;&nbsp;edit.setPassword(user.getPassword());//将新密码赋值<BR>&nbsp;}</FONT></P>
+<P><FONT color=#000000>5.编写struts.xml</FONT></P>
+<P>&lt;package name="needlogin" 
+extends="json-default"&gt;</P>
+<P><FONT color=#000000>&lt;!--</FONT><FONT color=#000000> <FONT color=#ff0000>userAction</FONT> 
+配置action&lt;bean&gt;--&gt;</FONT> 
+ 
+</P>
+<P><FONT color=#000000>&lt;action name= 
+"user_*" class= "<FONT color = #ff0000>  <FONT color=#000000><FONT color=#ff0000>userAction</FONT>   
+" 
+method="{1}"&gt;<BR>&nbsp;&nbsp;&nbsp;&lt;result name ="editpasswordSuccess" 
+type="json"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&lt;param 
+name="root"&gt;map&lt;/param&gt;<BR>&nbsp;&nbsp;&nbsp;&lt;/result&gt;<BR>&nbsp;&nbsp;&lt;/action&gt;</FONT> 
+</P>
+<P><FONT color=#000000>&nbsp;&lt;/package&gt;</FONT></P></FONT></FONT></FONT></FONT></FONT></body>
+</html>

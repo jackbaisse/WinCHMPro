@@ -1,0 +1,82 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>总结</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>##########################################<BR>#GitCommand</P>
+<P>#************************版本库管理************************<BR>git 
+init&nbsp;&nbsp;&nbsp; #初始化版本库<BR>git clone &lt;url&gt;&nbsp;&nbsp;&nbsp; 
+#克隆远程库</P>
+<P>git remote add &lt;originname&gt; &lt;url&gt;&nbsp;&nbsp;&nbsp; 
+#添加远程库关联<BR>git remote rm &lt;originname&gt;&nbsp;&nbsp;&nbsp; #删除远程库关联<BR>git 
+remote -v&nbsp;&nbsp;&nbsp; #查看远程库关联详情</P>
+<P>git push -u &lt;originname&gt; &lt;branch&gt;&nbsp;&nbsp;&nbsp; 
+#推送当前分支到远程库<BR>git pull&nbsp;&nbsp;&nbsp; #从远程库抓取分支</P>
+<P>git status&nbsp;&nbsp;&nbsp; #仓库状态</P>
+<P>git log&nbsp;&nbsp;&nbsp; #查看提交日志<BR>git log 
+--pretty=oneline&nbsp;&nbsp;&nbsp; #查看提交日志精简（）<BR>git log --graph</P>
+<P>git reflog&nbsp;&nbsp;&nbsp; #命令记录</P>
+<P>git rebase&nbsp;&nbsp;&nbsp; 
+#变基<BR>#*******************************************************</P>
+<P><BR>#************************增删改************************<BR>git add 
+&lt;file&gt;&nbsp;&nbsp; （文件夹/）（*.文件后缀）&nbsp;&nbsp;&nbsp; #保存到暂存区<BR>git rm 
+&lt;file&gt;&nbsp;&nbsp;&nbsp; #删除文件<BR>git diff &lt;file&gt;&nbsp;&nbsp;&nbsp; 
+#查看差异</P>
+<P>git commit -m &lt;message&gt;&nbsp;&nbsp;&nbsp; #提交到版本库<BR>git cherry-pick 
+&lt;commit id&gt;&nbsp;&nbsp;&nbsp; #复制一个特定的提交到当前分支</P>
+<P><BR>git checkout --&lt;file&gt;&nbsp;&nbsp;&nbsp; 
+#撤销修改(谨记--和file中间有空格隔开)<BR>#checkout只是撤销工作区的修改，如果已经添加到暂存区，先版本回退再撤销<BR>#*******************************************************</P>
+<P><BR>#************************版本回退************************<BR>git reset --hard 
+HEAD(当前版本，加^后缀标识上一版本，可加多个)<BR>git reset --hard &lt;commit 
+id&gt;<BR>#*******************************************************</P>
+<P><BR>#************************分支************************<BR>git 
+branch&nbsp;&nbsp;&nbsp; #查看分支<BR>git branch &lt;branch&gt;&nbsp;&nbsp;&nbsp; 
+#创建分支<BR>git checkout &lt;branch&gt;&nbsp;&nbsp;&nbsp; #切换分支<BR>git checkout -b 
+&lt;branch&gt;&nbsp;&nbsp;&nbsp; #创建并切换分支<BR>git switch 
+&lt;branch&gt;&nbsp;&nbsp;&nbsp; #切换分支<BR>git switch -c 
+&lt;branch&gt;&nbsp;&nbsp;&nbsp; #创建并切换分支<BR>git branch -d 
+&lt;branch&gt;&nbsp;&nbsp;&nbsp; #删除分支<BR>git branch -D 
+&lt;branch&gt;强制删除一个没有被合并过的分支<BR>git merge &lt;branch&gt;&nbsp;&nbsp;&nbsp; 
+#合并分支</P>
+<P>#通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。<BR>#如果要强制禁用Fast 
+forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。<BR>git merge --no-ff -m 
+&lt;message&gt; 
+&lt;branch&gt;<BR>#*******************************************************</P>
+<P><BR>#************************储存工作区************************<BR>git 
+stash&nbsp;&nbsp;&nbsp; #保存工作区<BR>git stash list&nbsp;&nbsp;&nbsp; 
+#查看保存列表<BR>git stash <A 
+href="mailto:apply@{<index">apply@{&lt;index</A>&gt;}&nbsp;&nbsp;&nbsp;&nbsp; 
+#找回指定工作区<BR>git stash apply&nbsp;&nbsp;&nbsp; 找回list最上一个保存记录<BR>git stash 
+pop&nbsp;&nbsp;&nbsp; 
+找回并删除list最上一个保存记录<BR>#*******************************************************</P>
+<P><BR>#************************标签************************<BR>git 
+tag&nbsp;&nbsp;&nbsp; #查看所有标签<BR>git tag &lt;tagname&gt;&nbsp;&nbsp;&nbsp; 
+#创建标签<BR>git tag &lt;tagname&gt; &lt;commit id&gt;&nbsp;&nbsp;&nbsp; 
+#给指定提交添加标签<BR>git tag -a &lt;tagname&gt; -m &lt;message&gt; &lt;commit 
+id&gt;&nbsp;&nbsp;&nbsp; #添加带说明的标签<BR>git show &lt;tagname&gt;&nbsp;&nbsp;&nbsp; 
+#查看标签详情<BR>git tag -d &lt;tagname&gt;&nbsp;&nbsp;&nbsp; #删除标签<BR>git push 
+&lt;origin&gt; &lt;tagname&gt;&nbsp;&nbsp;&nbsp; #将标签推送远程库<BR>git push 
+&lt;origin&gt; --tags&nbsp;&nbsp;&nbsp; #将所标签推送远程库<BR>git push &lt;origin&gt; 
+:refs/tags/&lt;tagname&gt;&nbsp;&nbsp;&nbsp; 
+#将标签从远程库删除（注意，先得删除本地标签）<BR>#*******************************************************</P>
+<P><BR>#************************.gitignore************************<BR>git add -f 
+&lt;file&gt;&nbsp;&nbsp;&nbsp; #强制推送被忽略的文件<BR>git check-ignore -v 
+&lt;file&gt;&nbsp;&nbsp;&nbsp; 
+#检查忽略的文件的规则<BR>#*******************************************************</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></body>
+</html>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>清除护理数据</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>--------患者新建的护理单据基本信息 select * from incommonnote <BR>select * from 
+INCOMMONNOTE inc&nbsp; where inc.noofinpatient=19230219 ;</P>
+<P>--------患者新建的护理单据所使用的通用单据的基本信息（此处的 incommonnoteflow值为incommonnoteflow列值 
+）清除护理单据<BR>select * from Incommonnote_Tab tab where 
+tab.incommonnoteflow='cd524056-406e-4bef-b55f-a49bb2b990f7'</P>
+<P>------患者的锁使用的通用单据的详细信息（此处的commonnote_tab_flow值为上面 
+Incommonnote_TaB表的commonnote_TAB_FLOW 的值）<BR>select * from commonnote_item i 
+where i.commonnote_tab_flow='cca0a514-88ce-4ed3-ba87-67547f341636'</P>
+<P>------护理单据的行信息（比如创建人，创建信息），此处的 
+incommonnoteflow值为Incommonnote_Tab表里的incommonnoteflow字段值<BR>select * from 
+Incommonnote_Row&nbsp; r&nbsp; where 
+r.incommonnoteflow='cd524056-406e-4bef-b55f-a49bb2b990f7' and r.valide=1</P>
+<P>------护理单据行，相应的列值（此处的 rowflow 值为Incommonnote_Row表的 rowflow列值）<BR>select * 
+from Incommonnote_Column c&nbsp;&nbsp; where 
+c.rowflow='bc536288-436b-4f49-b04f-e500bb2ba183' </P></body>
+</html>

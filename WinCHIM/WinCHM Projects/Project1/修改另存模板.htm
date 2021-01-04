@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>修改另存模板</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>--入院记录<BR>create table template_person_back as&nbsp; select * from 
+template_person </P>
+<P>select * from template_person where sortid='AB' and name not like 
+'入院记录--%'</P>
+<P>update template_person set memo= memo|| NAME ||'。'where sortid= 'AB' and name notlike '入院记录--%' and 
+memo is null</P>
+<P>update template_person set NAME= '入院记录--'|| NAME where sortid='AB' and name 
+not like '入院记录--%'<BR>--病程记录<BR>select 
+* from template_person where sortid='AC' and isconfigpagesize='0'&nbsp; and name 
+not like '首次病程--%'</P>
+<P>update template_person set memo= memo|| NAME ||'。'where 
+sortid='AC'and isconfigpagesize='0' and name not like '首次病程--%' and memo is 
+null</P>
+<P>update template_person set NAME= '首次病程--'|| NAME where 
+sortid='AC'and isconfigpagesize='0' and name not like '首次病程--%'<BR><BR></P></body>
+</html>

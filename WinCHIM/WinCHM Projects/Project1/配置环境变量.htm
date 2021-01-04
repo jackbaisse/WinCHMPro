@@ -1,0 +1,23 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>配置环境变量</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>进行java开发，首先要安装jdk，安装了jdk后还要进行环境变量配置：<BR>&nbsp;<BR>1、下载jdk（<A 
+href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</A>），我下载的版本是：jdk-7u45-windows-x64.exe<BR>&nbsp;<BR>2、安装jdk*.exe<BR>&nbsp;<BR>3、配置环境变量：右击“我的电脑”--&gt;"高级"--&gt;"环境变量"<BR>&nbsp;<BR>1）在系统变量里新建JAVA_HOME变量，变量值为：C:\Program 
+Files\Java\jdk1.7.0_45（根据自己的安装路径填写）win10省略&nbsp;<BR>2）新建classpath变量，变量值为：(<FONT color=#ff0000>注意前面的点</FONT>)<BR>.;C:\Program Files\Java\jdk1.7.0_45\lib;C:\Program 
+Files\Java\jdk1.7.0_45\lib\tools.jar<BR>3）在path变量（已存在不用新建）添加变量值：;C:\Program 
+Files\Java\jdk1.7.0_45\bin;C:\Program Files\Java\jre\bin（注意变量值之间用“;”隔开）<BR>4、“开始”--&gt;“运行”--&gt;输入“javac”--&gt;"回车"，如果能正常打印用法说明配置成功！<BR>&nbsp;<BR>补充环境变量的解析:<BR>&nbsp;<BR>JAVA_HOME:jdk的安装路径<BR>&nbsp;<BR>classpath:java加载类路径，只有类在classpath中java命令才能识别，在路径前加了个"."表示当前路径。<BR>&nbsp;<BR>path：系统在任何路径下都可以识别java,javac命令。<BR></P></body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检查老库数据</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>select<BR>(select count(*) from department)as department,--科室<BR>(select 
+count(*) from ward)as ward,--病区<BR>(select count(*) from dept2ward)as dept2ward, 
+--科室病区对照<BR>(select count(*) from users)as users, --用户<BR>(select count(*) from 
+emrtemplet)as emrtemplet,--通用模板<BR>(select count(*) from TEMPLET2HISDEPT)as 
+TEMPLET2HISDEPT,--科室匹配<BR>(select count(*) from EMRDEPT2HIS)as EMRDEPT2HIS, 
+--配对科室<BR>(select count(*) from template_person)as template_person, 
+--另存为的模板<BR>(select count(*) from emrtemplet_item_person)as 
+emrtemplet_item_person,&nbsp; --右边的小模板<BR>(select count(*) from 
+emrtemplet_item_person_catalog)as emrtemplet_item_person_catalog, 
+--右边的小模板节点<BR>(select count(*) from diagnosis)as diagnosis,--诊断<BR>(select 
+count(*) from operation)as operation,-- 手术<BR>(select count(*) from 
+DIAGNOSISOFCHINESE)as DIAGNOSISOFCHINESE,--中医诊断<BR>(select count(*) from 
+toxicosis )as toxicosis,--损伤中毒<BR>(select count(*) from diagnosis_xt_bj)as 
+diagnosis_xt_bj,--病理诊断<BR>(select count(*) from there_check_event)as 
+there_check_event,--三测单状态<BR>(select count(*) from dateelement)as 
+dateelement,----数据元<BR>(select count(*) from commonnote)as 
+commonnote,--护理记录表格名称<BR>(select count(*) from commonnote_tab)as 
+commonnote_tab,--护理记录表格基本信息<BR>(select count(*) from commonnote_item)as 
+commonnote_item,----护理记录表格需要哪些列信息<BR>(select count(*) from hospitalinfo) as 
+hospitalinfo--护理记录单医院默认值表<BR>from dual<BR>union all<BR>select<BR>(select 
+count(*) from <A 
+href="mailto:department@nydba">department@nydba</A>),--科室<BR>(select count(*) 
+from <A href="mailto:ward@nydba">ward@nydba</A>),--病区<BR>(select count(*) from 
+<A href="mailto:dept2ward@nydba">dept2ward@nydba</A>), --科室病区对照<BR>(select 
+count(*) from <A href="mailto:users@nydba">users@nydba</A>), --用户<BR>(select 
+count(*) from <A 
+href="mailto:emrtemplet@nydba">emrtemplet@nydba</A>),--通用模板<BR>(select count(*) 
+from <A 
+href="mailto:TEMPLET2HISDEPT@nydba">TEMPLET2HISDEPT@nydba</A>),--科室匹配<BR>(select 
+count(*) from <A href="mailto:EMRDEPT2HIS@nydba">EMRDEPT2HIS@nydba</A>), 
+--配对科室<BR>(select count(*) from <A 
+href="mailto:template_person@nydba">template_person@nydba</A>), 
+--另存为的模板<BR>(select count(*) from <A 
+href="mailto:emrtemplet_item_person@nydba">emrtemplet_item_person@nydba</A>),&nbsp; 
+--右边的小模板<BR>(select count(*) from <A 
+href="mailto:emrtemplet_item_person_catalog@nydba">emrtemplet_item_person_catalog@nydba</A>), 
+--右边的小模板节点<BR>(select count(*) from <A 
+href="mailto:diagnosis@nydba">diagnosis@nydba</A>),--诊断<BR>(select count(*) from 
+<A href="mailto:operation@nydba">operation@nydba</A>),-- 手术<BR>(select count(*) 
+from <A 
+href="mailto:DIAGNOSISOFCHINESE@nydba">DIAGNOSISOFCHINESE@nydba</A>),--中医诊断<BR>(select 
+count(*) from toxicosis @nydba),--损伤中毒<BR>(select count(*) from <A 
+href="mailto:diagnosis_xt_bj@nydba">diagnosis_xt_bj@nydba</A>),--病理诊断<BR>(select 
+count(*) from <A 
+href="mailto:there_check_event@nydba">there_check_event@nydba</A>),--三测单状态<BR>(select 
+count(*) from <A 
+href="mailto:dateelement@nydba">dateelement@nydba</A>),----数据元<BR>(select 
+count(*) from <A 
+href="mailto:commonnote@nydba">commonnote@nydba</A>),--护理记录表格名称<BR>(select 
+count(*) from <A 
+href="mailto:commonnote_tab@nydba">commonnote_tab@nydba</A>),--护理记录表格基本信息<BR>(select 
+count(*) from <A 
+href="mailto:commonnote_item@nydba">commonnote_item@nydba</A>),----护理记录表格需要哪些列信息<BR>(select 
+count(*) from <A 
+href="mailto:hospitalinfo@nydba">hospitalinfo@nydba</A>)--护理记录单医院默认值表<BR>from 
+dual<BR></P></body>
+</html>

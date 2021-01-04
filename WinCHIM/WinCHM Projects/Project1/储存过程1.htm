@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>储存过程</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>&nbsp; --不带参数储存过程<BR>&nbsp; CREATE OR REPLACE procedure proc1 AS<BR>&nbsp; 
+name varchar(10);<BR>&nbsp; age&nbsp; number(10);<BR>BEGIN<BR>&nbsp; name := 
+'xiaoming';<BR>&nbsp; age&nbsp; := '18';<BR>&nbsp; dbms_output.put_line('name=' 
+|| name || ', age=' || age);<BR>END;</P>
+<P>&nbsp; --存储过程调用<BR>BEGIN<BR>&nbsp; proc1();<BR>END;</P>
+<P>drop procedure proc1;</P>
+<P>&nbsp; --带参<BR>&nbsp; create or replace procedure proc2(name in varchar, age 
+in int) as<BR>begin<BR>&nbsp; dbms_output.put_line('name=' || name || ',age' || 
+age);<BR>end;</P>
+<P>BEGIN<BR>&nbsp; proc2('姜煜', 18);<BR>END;<BR>drop procedure proc2;</P>
+<P>&nbsp; --出现异常的输出储存过程<BR>&nbsp; create or replace procedure proc3 as<BR>&nbsp; 
+age int;<BR>begin<BR>&nbsp; age := 10<BR>/<BR>&nbsp; 0; 
+dbms_output.put_line(age);<BR>exception<BR>&nbsp; when others then 
+dbms_output.put_line('error');<BR>end;<BR>begin<BR>&nbsp; 
+proc3();<BR>end;<BR>drop procedure proc3;</P>
+<P>&nbsp; --获取当前时间和总人数<BR>&nbsp; create or replace procedure proc4 is<BR>&nbsp; 
+v_total int; v_date varchar(20);<BR>begin<BR>&nbsp; select count(*) into v_total 
+from inpatient where name = '叶禹'; select to_char(sysdate, 'yyy-mm-dd') into 
+v_date from inpatient where name = '高唱'; dbms_output.put_line('总人数' || v_total); 
+dbms_output.put_line('当前时间' || v_date);<BR>end;</P>
+<P>begin<BR>&nbsp; proc4();<BR>end;<BR>drop procedure proc4;<BR>&nbsp; 
+--带输入参数和输出参数的储存过程<BR>&nbsp; create or replace procedure proc5(param1 in 
+varchar2, param2 out varchar2) is<BR>begin<BR>&nbsp; select name into param2 
+from inpatient where rownum &lt;= 1; --一行数据对应一个输出<BR>&nbsp; 
+dbms_output.put_line(param2);<BR>exception<BR>&nbsp; when no_data_found then 
+dbms_output.put_line('error');<BR>end;</P>
+<P>&nbsp; declare o_result varchar(2000);<BR>begin<BR>&nbsp; proc5('8000849', 
+o_result);<BR>end;<BR>drop procedure proc5;<BR>&nbsp; --调用储存过程输出内容&nbsp; 
+<BR>&nbsp; create or replace procedure proc6(param1 in varchar2, param2 out 
+varchar2, param3 out varchar2, param4 out varchar2) is<BR>begin<BR>&nbsp; select 
+name into param2 from inpatient where rownum &lt;= 1;<BR>exception<BR>&nbsp; 
+when others then param4 := '未找到数据';<BR>end;</P>
+<P>&nbsp; declare v_v1 varchar(10); v_v2 varchar(10); v_v3 varchar(20); v_v4 
+varchar(20);<BR>begin<BR>&nbsp; v_v1 := 'jn'; proc6(v_v1, v_v2, v_v3, v_v4); 
+dbms_output.put_line(v_v4); dbms_output.put_line(v_v2);<BR>end;<BR>drop 
+procedure proc6;<BR>--输入参数insert表<BR>&nbsp; create or replace procedure 
+proc7(param1 in varchar2, param2 in varchar2, param3 in varchar2, param4 out 
+varchar2, param5 out varchar2) is<BR>begin<BR>&nbsp; insert into 
+dept2ward(deptid, wardid, totalbed) values(param1, param2, 
+param3);<BR>exception<BR>&nbsp; when others then param4 := '-1'; param5 := 
+'插入失败';<BR>end;</P>
+<P>&nbsp; declare v_1 varchar2(10); v_2 varchar2(10); v_3 varchar2(10); v_4 
+varchar2(10); v_5 varchar2(10);<BR>begin<BR>&nbsp; v_1 := '1111'; v_2 := '1111'; 
+v_3 := '1111'; proc7(v_1, v_2, v_3, v_4, v_5); commit;<BR>end;<BR>drop procedure 
+proc7;<BR>--删除表数据<BR>&nbsp; create or replace procedure proc8(param1 varchar2, 
+param2 out varchar2, param3 out varchar2) is<BR>begin<BR>&nbsp; delete dept2ward 
+where deptid = param1;<BR>exception<BR>&nbsp; when others then param2 := '-1'; 
+param3 := '删除失败';<BR>end;</P>
+<P>&nbsp; declare v_1 varchar2(10); v_2 varchar2(10); v_3 
+varchar2(10);<BR>begin<BR>&nbsp; v_1 := '1111'; proc8(v_1, v_2, 
+v_3);<BR>end;<BR>drop procedure proc8;<BR>&nbsp; --游标<BR>&nbsp; create or 
+replace procedure proc9(param1 in varchar2) is<BR>begin<BR>&nbsp; update 
+dept2ward set deptid = '2222' where deptid = param1; if sql%found then 
+dbms_output.put_line('修改成功'); commit; else dbms_output.put_line('修改失败');<BR>end 
+if;<BR>end;</P>
+<P>&nbsp; declare v_v1 varchar2(20);<BR>begin<BR>&nbsp; v_v1 := '1111'; 
+proc9(v_v1);<BR>end;<BR>drop procedure proc9</P>
+<P>--游标for<BR>&nbsp; create or replace procedure proc10<BR>&nbsp;&nbsp; 
+is<BR>&nbsp;&nbsp; begin<BR>&nbsp; declare <BR>&nbsp; cursor emp_1 is select * 
+from dept2ward;<BR>begin<BR>&nbsp; for vrow in emp_1 loop<BR>&nbsp;&nbsp;&nbsp; 
+dbms_output.put_line(vrow.deptid);<BR>&nbsp;&nbsp;&nbsp; end 
+loop;<BR>end;<BR>end;<BR>begin<BR>&nbsp; proc10();<BR>end;</P>
+<P>--游标fetch 1\声明 cursor 2、打开open 3\循环遍历游标、退出条件4、关闭游标<BR>create or replace 
+procedure job_5<BR>is<BR>begin<BR>&nbsp; declare<BR>&nbsp; cursor cur_1 is 
+select deptid,wardid from dept2ward;<BR>&nbsp; name1 dept2ward.deptid 
+%type;<BR>&nbsp; name2 dept2ward.wardid %type;<BR>&nbsp; 
+begin<BR>&nbsp;&nbsp;&nbsp; open cur_1;<BR>&nbsp;&nbsp;&nbsp; 
+loop<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetch cur_1 into 
+name1,name2;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbms_output.put_line(name1||name2);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit when 
+cur_1%notfound;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end 
+loop;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close cur_1;<BR>&nbsp;&nbsp;&nbsp; 
+end;<BR>&nbsp; end;<BR>&nbsp; <BR>begin<BR>&nbsp; job_5();<BR>&nbsp; 
+end;<BR></P></body>
+</html>

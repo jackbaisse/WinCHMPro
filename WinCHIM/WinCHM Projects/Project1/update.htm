@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>update</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>--联表更新<BR>update Iemzy_Needitem a set isneed=(select 
+isneed from <A href="mailto:Iemzy_Needitem@Nydba">Iemzy_Needitem@Nydba</A> b 
+where b.id=a.id&nbsp; )<BR>where exists(select 1 from <A 
+href="mailto:Iemzy_Needitem@Nydba">Iemzy_Needitem@Nydba</A> b where 
+a.id=b.id)<BR>-----内联视图更新-----<BR><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">UPDATE 
+( select t1.fmoney fmoney1</SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">,t2.fmoney 
+fmoney2 from t1,t2 where t1.fname =</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"> 
+t2.fname )t set fmoney1 </SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">=fmoney2</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,128,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"> ;<BR><BR>-------<SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: bold 16px/1.5 Verdana,Arial,Helvetica,sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">merge更新-------</SPAN><BR><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">merge 
+into t1 using (select t2.fname</SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">,</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">t2.fmoney 
+from t2) t on (t.fname </SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">=</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"> 
+t1.fname) when matched then update set t1.fmoney </SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">= 
+t.fmoney</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,128,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">;</SPAN> <BR>----基本语法----- <BR>  </SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,128,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"> merge into 目标表 ausing 源表 b on(a.条件字段1=b.条件字段1 and 
+a.条件字段2=b.条件字段2 ……)&nbsp; when matched then update set 
+a.更新字段=b.字段<BR></SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,128,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"> when&nbsp; not macthed then insert into 
+a(字段1,字段2……)values(值1,值2……)</SPAN> &lt; /P&gt;<BR><FONT color=#ff0000>merge into user2dept a using(select 
+id,deptid,wardid from users where wardid is not null) b on (a.userid = 
+b.id)<BR>    when 
+matchedthenupdateseta.deptid=b.deptid,a.wardid=b.wardid<BR>when not matched then insert(a.userid,a.deptid,a.wardid) 
+values(b.id,b.deptid,b.wardid)</FONT> &lt; /P&gt; &lt; /P&gt;   
+ <   
+/P></body>
+</html>

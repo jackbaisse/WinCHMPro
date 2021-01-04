@@ -1,0 +1,36 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>删除文件</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、删除文件<BR>rm filename.txt</P>
+<P>2、从版本库删除文件<BR>git rm filename.txt --删除文件<BR>git commit -m "" 
+--提交</P>
+<P>提示：<BR><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(45,112,145); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(235,247,253); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; text-shadow: 0px 1px 0px #ffffff'>先手动删除文件，然后使用git 
+rm &lt;file&gt;和git add&lt;file&gt;效果是一样的</SPAN>    
+</P>
+<P><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(102,102,102); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：<BR><BR>git 
+checkout -- filename.txt</SPAN></P>
+<P><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(102,102,102); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'><FONT style="BACKGROUND-COLOR: #fafafa" color=#dd0055 size=2 face=Consolas>git 
+checkout</FONT><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(102,102,102); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</SPAN></SPAN></P>
+<P><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(102,102,102); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(102,102,102); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "Helvetica Neue",Helvetica,Arial,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(216,80,48); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,241,240); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; text-shadow: 0px 1px 0px #ffffff'>&nbsp;注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！</SPAN></SPAN></SPAN></P></body>
+</html>

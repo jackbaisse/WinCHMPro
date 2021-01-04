@@ -1,0 +1,46 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>时间格式化</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>--日期加5分钟<BR>select DOTIME,to_char(to_date(substr(DOTIME,1,16),'YYYY-MM-DD 
+HH24:MI')+5/(24*60),'YYYY-MM-DD HH24:MI') from PATIENTSTATUS</P>
+<P>--去空格日期格式<BR>to_date(substr(replace(a.OUTHOSDATE,' 
+',''),1,20),'YYYY-MM-DD HH24:MI:SS') 
+<BR>  
+  to_date(substr(trim(a.OUTHOSDATE),1,20),'YYYY-MM-DD HH24:MI:SS')</P>
+<P>--检测日期格式函数<BR>create or replace function fun_date(i_dt 
+varchar2) return number is&nbsp; <BR>v_dt date;<BR>begin <BR>&nbsp;&nbsp; v_dt 
+:= to_date(substr(i_dt,1,19),'yyyy-mm-dd HH24:MI:SS');<BR>return 
+1;<BR>exception&nbsp; when others then&nbsp;&nbsp; <BR>&nbsp;&nbsp; return 
+0<BR>&nbsp;&nbsp; ;end <BR>&nbsp;&nbsp; fun_date; <BR>select fun_date(MODIFYTIME), MODIFYTIME from 
+inpatientchangeinfo where fun_date(MODIFYTIME)= '0' <BR><BR><BR><BR>select 
+substr(MODIFYTIME,1,4)||'年' from inpatientchangeinfo where MODIFYTIME&gt;'9999' 
+or MODIFYTIME&lt;'-4713'&nbsp; --年<BR>union all<BR>select 
+substr(MODIFYTIME,6,2)||'月' from inpatientchangeinfo where MODIFYTIME&lt;='01' 
+and MODIFYTIME&gt;'24'&nbsp; --月<BR>union all<BR>select 
+substr(MODIFYTIME,9,2)||'日' from inpatientchangeinfo where MODIFYTIME&lt;='1' 
+and MODIFYTIME&gt;'31'&nbsp;&nbsp; --日<BR>union all<BR>select 
+substr(MODIFYTIME,12,2)||'时' from inpatientchangeinfo where MODIFYTIME&lt;='01' 
+and MODIFYTIME&gt;'24'&nbsp; ---时<BR>union all<BR>select 
+substr(MODIFYTIME,15,2)||'分' from inpatientchangeinfo where MODIFYTIME&lt;='01' 
+and MODIFYTIME&gt;'60'&nbsp; --分<BR>union all<BR>select 
+substr(MODIFYTIME,18,2)||'秒' from inpatientchangeinfo where MODIFYTIME&lt;= 
+   '01' and 
+MODIFYTIME&gt;'60'&nbsp;  --秒 
+</P> 
+ 
+   </body>
+</html>

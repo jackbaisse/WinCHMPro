@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>科室匹配模板</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>   1.模板匹配科室<BR>insert into 
+emrdept2his(emr_dept_id,his_dept_id) select '*',deptid from dept2ward</P>
+<P>   2.匹配科室模板<BR>insert into TEMPLET2HISDEPT(HIS_DEPT_ID, TEMPLETID) 
+select d.ksno,templet_id from emrtemplet c,<BR>(select a.id as 
+ksno,a.name as ksname from department a inner join dept2ward b on a.id =     
+           b.deptid) d < 
+BR> where MR_NAME 
+ like   '%-1'</P>
+<P> 
+  insert into TEMPLET2HISDEPT(HIS_DEPT_ID, TEMPLETID) select 
+d.ksno,templet_id from emrtemplet c,<BR>(select a.id as 
+ksno,a.name as ksname from department a inner join dept2ward b on a.id =      
+          b.deptid) d <BR>where 
+mr_class='AM' and mr_name= 
+ '通用模板－瑞金'&nbsp;   --讨论</P>
+<P><BR>select *&nbsp; from emrtemplet where mr_class='AD' 
+and mr_name like '%瑞金' --知情文件<BR>select *&nbsp; from emrtemplet where 
+mr_class='AH' and mr_name like '%瑞金'and creator_id in('00','000099') 
+--手术相关<BR>select *&nbsp; from emrtemplet where mr_class='AF' and mr_name = 
+'通用模板－瑞金' --会诊<BR>select *&nbsp; from emrtemplet where mr_class='AE' and mr_name 
+like '%瑞金1' for update --其他<BR>select *&nbsp; from emrtemplet where 
+mr_class='50'&nbsp; --公共文件<BR>select *&nbsp; from emrtemplet where mr_class='80' 
+and mr_name='通用模板－瑞金'&nbsp; --转科记录<BR>select *&nbsp; from emrtemplet where 
+mr_class='AQ' and mr_name='通用模板－瑞金'&nbsp; --死亡<BR>select *&nbsp; from emrtemplet 
+where mr_class='AM' and mr_name='通用模板－瑞金'&nbsp; --讨论<BR>select *&nbsp; from 
+emrtemplet where valid= 
+    '0'</P>
+<P>   delete emrtemplet where valid= 
+    '0'--清除已删除模板</P>
+<P> 
+    3.删除匹配模板</P>
+<P>delete from templet2hisdept&nbsp; a where&nbsp; 
+templetid&nbsp; <BR>in（select&nbsp; 
+emrtemplet.templet_id&nbsp; from&nbsp; emrtemplet&nbsp;&nbsp; where mr_name =   
+      '出院诊断证明--泰和')</P>
+<P>-- TEMPLET2HISDEPT模板匹配表</P>
+<P>--emrtemplet 模板表</P>
+<P>--department 全院科室表</P>
+<P>--dept2ward 住院科室表</P>
+<P> 4.更改用户模板</P>
+<P>select * from emrtemplet where MR_name like '%压疮%'</P>
+<P>update emrtemplet set dept_id = '*',creator_id='00' where 
+MR_name like '%交接%'</P>
+<P> 5.更改用户模板</P>
+<P></P>select * from emrtemplet_back
+<P></P>
+<P>update emrtemplet_back set templet_id= 
+substr(templet_id,-6,5);<BR> update emrtemplet_back set  mr_name=  
+  mr_name||'--后发中医院';</P>
+<P>insert into emrtemplet&nbsp; select * from 
+emrtemplet_back where dept_id=      
+  '*'   &lt;  BR&gt;  
+  </P> 
+  </body>
+</html>

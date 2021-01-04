@@ -1,0 +1,101 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>新建项目</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、生成insert into</P>
+<P>if Object_id('UspOutputData') is not null<BR>&nbsp;&nbsp;&nbsp; drop 
+PROCEDURE UspOutputData;<BR>go<BR>CREATE PROCEDURE dbo.UspOutputData 
+<BR>&nbsp;&nbsp;&nbsp; @tablename sysname <BR>AS<BR>BEGIN <BR>&nbsp;&nbsp;&nbsp; 
+declare @column varchar(4000) <BR>&nbsp;&nbsp;&nbsp; declare @columndata 
+varchar(4000) <BR>&nbsp;&nbsp;&nbsp; declare @sql varchar(4000) 
+<BR>&nbsp;&nbsp;&nbsp; declare @xtype tinyint <BR>&nbsp;&nbsp;&nbsp; declare 
+@name sysname <BR>&nbsp;&nbsp;&nbsp; declare @objectId int 
+<BR>&nbsp;&nbsp;&nbsp; declare @objectname sysname <BR>&nbsp;&nbsp;&nbsp; 
+declare @ident int <BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; set nocount on 
+<BR>&nbsp;&nbsp;&nbsp; set @objectId=object_id(@tablename) 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; if @objectId is null -- 判断对象是否存在 
+<BR>&nbsp;&nbsp;&nbsp; begin <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+print 'The object not exists' <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+return <BR>&nbsp;&nbsp;&nbsp; end <BR>&nbsp;&nbsp;&nbsp; set 
+@objectname=rtrim(object_name(@objectId)) <BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; if 
+@objectname is null or charindex(@objectname,@tablename)=0 --此判断不严密 
+<BR>&nbsp;&nbsp;&nbsp; begin <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+print 'object not in current database' 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return <BR>&nbsp;&nbsp;&nbsp; end 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; if OBJECTPROPERTY(@objectId,'IsTable') &lt; 
+&gt; 1 -- 判断对象是否是table <BR>&nbsp;&nbsp;&nbsp; begin 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print 'The object is not table' 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return <BR>&nbsp;&nbsp;&nbsp; end 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; select @ident=status&amp;0x80 from syscolumns 
+where <A href="mailto:id=@objectid">id=@objectid</A> and status&amp;0x80=0x80 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; if @ident is not null 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print 'SET IDENTITY_INSERT <A 
+href="mailto:'+@TableName+'">'+@TableName+'</A> ON' 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; declare syscolumns_cursor 
+cursor<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; for select c.name,c.xtype from syscolumns 
+c where <A href="mailto:c.id=@objectid">c.id=@objectid</A> order by c.colid 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; open syscolumns_cursor <BR>&nbsp;&nbsp;&nbsp; 
+set @column='' <BR>&nbsp;&nbsp;&nbsp; set @columndata='' <BR>&nbsp;&nbsp;&nbsp; 
+fetch next from syscolumns_cursor into @name,@xtype 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; while @@fetch_status &lt; &gt;-1 
+<BR>&nbsp;&nbsp;&nbsp; begin <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if 
+@@fetch_status &lt; &gt;-2 <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; begin 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if @xtype 
+not in(189,34,35,99,98) --timestamp不需处理，image,text,ntext,sql_variant 暂时不处理 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; begin 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+set @column = @column+ case when len(@column)=0 then'' else ','end + @name 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+set @columndata = @columndata + case&nbsp;&nbsp;&nbsp; when len(@columndata)=0 
+then '' else ','','',' end 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
++ case&nbsp;&nbsp;&nbsp; when @xtype in(167,175) then <A 
+href="mailto:'''''''''+'+@name+'+'''''''''">'''''''''+'+@name+'+'''''''''</A> 
+--varchar,char 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+when @xtype in(231,239) then <A 
+href="mailto:'''N''''''+'+@name+'+'''''''''">'''N''''''+'+@name+'+'''''''''</A> 
+--nvarchar,nchar 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+when @xtype=61 then '''''''''+convert(char(23),'+@name+',121)+''''''''' 
+--datetime 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+when @xtype=58 then '''''''''+convert(char(16),'+@name+',120)+''''''''' 
+--smalldatetime 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+when @xtype=36 then '''''''''+convert(char(36),'+@name+')+''''''''' 
+--uniqueidentifier 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+else @name 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+end&nbsp; 
+--case<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end 
+-- if <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end 
+--if<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fetch next from 
+syscolumns_cursor into @name,@xtype <BR>&nbsp;&nbsp;&nbsp; end&nbsp; 
+--while<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; close syscolumns_cursor 
+<BR>&nbsp;&nbsp;&nbsp; deallocate syscolumns_cursor 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; set @sql='set nocount on select ''insert <A 
+href="mailto:'+@tablename+'('+@column+'">'+@tablename+'('+@column+'</A>) 
+values(''as ''--'','+@columndata+','')'' from <A 
+href="mailto:'+@tablename">'+@tablename</A> <BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; 
+print <A href="mailto:'--'+@sql">'--'+@sql</A> <BR>&nbsp;&nbsp;&nbsp; exec(@sql) 
+<BR>&nbsp;<BR>&nbsp;&nbsp;&nbsp; if @ident is not null <BR>&nbsp;&nbsp;&nbsp; 
+print 'SET IDENTITY_INSERT <A href="mailto:'+@TableName+'">'+@TableName+'</A> 
+OFF' <BR>END;<BR>GO</P>
+<P>--exec UspOutputData yp01h 查询表</P>
+<P>&nbsp;</P></body>
+</html>

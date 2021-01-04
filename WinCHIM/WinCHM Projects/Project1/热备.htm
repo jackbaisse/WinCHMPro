@@ -1,0 +1,201 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>热备</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>一、规划<BR>&nbsp;&nbsp;&nbsp; 主库&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 
+备库<BR>数据库版本&nbsp;11.2.0.4&nbsp;&nbsp;11.2.0.4<BR>IP&nbsp;&nbsp;192.168.0.252&nbsp;&nbsp;192.168.0.250<BR>实例&nbsp;&nbsp;testemr&nbsp;&nbsp;&nbsp;sbemr<BR>静态监听&nbsp;&nbsp;1522&nbsp;&nbsp;&nbsp;1522<BR>db_name&nbsp;&nbsp;testemr&nbsp;&nbsp;&nbsp;testemr<BR>instance_name&nbsp;testemr&nbsp;&nbsp;&nbsp;sbemr<BR>db_unique_name&nbsp;testemr&nbsp;&nbsp;&nbsp;sbemr<BR>tnsnames.ora&nbsp;tnstestemr&nbsp;&nbsp;tnssemr<BR>服务名&nbsp;&nbsp;testemr&nbsp;&nbsp;&nbsp;testemr&nbsp;</P>
+<P><BR>【主库参数设置】<BR>****************<BR>alter database force logging; --启用force 
+logging功能<BR>shutdown immesdiate;<BR>startup mount;<BR>alter database 
+archivelog;&nbsp; --启动归档<BR>alter database open;<BR>alter system set 
+log_archive_format='%t_%s_%r.arc' scope=spfile; --设置归档日期格式，便于区分<BR>  
+alter systemset db_unique_name='emr' 
+scope=   
+spfile;&nbsp;&nbsp;--调整db_unique_name，主备库数据库唯一名称不能一样&lt;BR&gt;altersystemsetlog_archive_config='DG_CONFIG=(emr,emrsb)' 
+scope=both;<BR>D:\app\Administrator\arch\emr&nbsp; --建立文件夹，用于存放同步的归档日志 
+<BR>   
+altersystemsetlog_archive_dest_1='LOCATION=D:\app\Administrator\arch\emr 
+VALID_FOR=(ALL_LOGFILES,ALL_ROLES) DB_UNIQUE_NAME=emr' scope=both;<BR> 
+  altersystemsetlog_archive_dest_2='SERVICE=emrsb LGWR SYNC AFFIRM NET_TIMEOUT=15 
+REOPEN=60 COMPRESSION=ENABLE VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) 
+DB_UNIQUE_NAME=emrsb' scope=both;<BR>alter system set 
+db_file_name_convert='D:\app\Administrator\oradata\emrsb','D:\app\Administrator\oradata\emr' 
+scope=spfile; --设置数据文件转换路径<BR>alter system set 
+log_file_name_convert='D:\app\Administrator\oradata\emrsb','D:\app\Administrator\oradata\emr' 
+scope=spfile;--设置redo文件转换路径<BR>alter system set 
+standby_file_management=auto;<BR>alter system set fal_client='TNSEMR' 
+scope=both;--本地tns<BR>alter system set fal_server='TNSEMRSB' 
+scope=both;--远程tms<BR>****************</P>
+<P>【主库的静态监听】<BR>****************<BR>此监听只用于进行data 
+durad传输<BR>路径：D:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN<BR>LISTENER1 
+=<BR>&nbsp; (DESCRIPTION_LIST =<BR>&nbsp;&nbsp;&nbsp; (DESCRIPTION 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS_LIST 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL =                   TCP)(HOST = 
+WIN-C08VPM2H9DN)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp;&nbsp; 
+)<BR>&nbsp; )</P>
+<P>SID_LIST_LISTENER1 =<BR>&nbsp; (SID_LIST =<BR>&nbsp;&nbsp;&nbsp; (SID_DESC 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (GLOBAL_DBNAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SID_NAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ORACLE_HOME = 
+D:\app\Administrator\product\11.2.0\dbhome_1)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; 
+)<BR>lsnrctl start LISTENER1&nbsp;&nbsp;&nbsp; 
+--启动监听后面不能加分号<BR>****************</P>
+<P><BR>【主库的tns配置】<BR>***************<BR>此配置是便于进行数据传输连接<BR>路径：D:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN</P>
+<P>tnstestemr =<BR>&nbsp; (DESCRIPTION =<BR>&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL = TCP)(HOST = 
+    192.168.0.252)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; 
+(CONNECT_DATA =<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVER = 
+DEDICATED)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVICE_NAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; )</P>
+<P>tnssbemr =<BR>&nbsp; (DESCRIPTION =<BR>&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL = TCP)(HOST = 
+    192.168.0.250)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; 
+(CONNECT_DATA =<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVER = 
+DEDICATED)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVICE_NAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; )<BR>***************</P>
+<P>【备库参数设置】<BR>***************<BR>1.拷贝密码文件 
+将主库的密码文件拷贝到备库路径，然后修改文件名为PWDsbtestemr.ora&nbsp;&nbsp; --根据库名不一样，PWD后面必须是oracle 
+sid名称<BR>D:\app\Administrator\product\11.2.0\dbhome_1\database\PWDtestemr.ora</P>
+<P>2.根据如下文字创建文件INITsbtestemr.ORA,位置D:\app\Administrator\product\11.2.0\dbhome_1\database\INITsbtestemr.ORA<BR>db_name='testemr'<BR>db_unique_name='sbemr'<BR>memory_target=12030765248<BR>audit_file_dest='D:\app\Administrator\admin\sbemr\adump'<BR>compatible='11.2.0.4.0'<BR>control_files='D:\app\Administrator\oradata\sbemr\control01.ctl','D:\app\Administrator\fast_recovery_area\sbemr\control02.ctl'<BR>log_archive_config='DG_CONFIG=(testemr,sbemr)'<BR>log_archive_dest_1='LOCATION=D:\app\Administrator\arch\sbemr 
+VALID_FOR=(ALL_LOGFILES,ALL_ROLES) 
+DB_UNIQUE_NAME=sbemr'<BR>log_archive_dest_2='SERVICE=tnstestemr LGWR SYNC AFFIRM 
+NET_TIMEOUT=15 REOPEN=60 COMPRESSION=ENABLE 
+VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) 
+DB_UNIQUE_NAME=testemr'<BR>db_file_name_convert='D:\app\Administrator\oradata\testemr','D:\app\Administrator\oradata\sbemr'<BR>log_file_name_convert='D:\app\Administrator\oradata\testemr','D:\app\Administrator\oradata\sbemr'<BR>log_archive_format='%t_%s_%r.arc'<BR>fal_client='tnssbemr'<BR>fal_server='tnstestemr'<BR>standby_file_management='AUTO'<BR>--&nbsp; 
+手动创建以上的文件夹<BR>3 手动cmd注册window的oracle服务： oradim -new&nbsp; -sid emrsb<BR>4 
+set oracle_sid=sbtestemr;<BR>5 sqlplus / as sysdba;<BR>6 create spfile from 
+pfile;<BR>7 startup nomount<BR>8 配置静态监听,和主库一样<BR>tnstestemr =<BR>&nbsp; 
+(DESCRIPTION =<BR>&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL = TCP)(HOST = 
+192.168.0.252)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; (CONNECT_DATA 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVER = 
+DEDICATED)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVICE_NAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; )</P>
+<P>tnssbemr =<BR>&nbsp; (DESCRIPTION =<BR>&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL = TCP)(HOST = 
+    192.168.0.250)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; 
+(CONNECT_DATA =<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVER = 
+DEDICATED)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SERVICE_NAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; )<BR>9 
+配置静态LISTENER1监听<BR>&nbsp;路径：D:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN<BR>&nbsp;其中：testemr为数据库服务名，和主库一致，sbemr为sid，和主库不一致，唯一的。<BR>LISTENER1 
+=<BR>&nbsp; (DESCRIPTION_LIST =<BR>&nbsp;&nbsp;&nbsp; (DESCRIPTION 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS_LIST 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL =                   TCP)(HOST = 
+192.168.0.250)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp;&nbsp; )<BR>&nbsp; 
+)</P>
+<P>SID_LIST_LISTENER1 =<BR>&nbsp; (SID_LIST =<BR>&nbsp;&nbsp;&nbsp; (SID_DESC 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (GLOBAL_DBNAME = 
+testemr)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (SID_NAME = 
+sbemr)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ORACLE_HOME = 
+D:\app\Administrator\product\11.2.0\dbhome_1)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; 
+)</P>
+<P>10 启动监听：lsnrctl start LISTENER1</P>
+<P>【检查主备库参数是否存在问题】<BR>*********************<BR>1 show parameter&nbsp; 
+db_unique_name; -- 主备要不同<BR>2 show parameter compatible ;-- 数据库版本必须一致<BR>3 show 
+parameter log_archive_config<BR>4 show parameter&nbsp; 
+log_archive_dest_1;<BR>&nbsp; show parameter&nbsp; log_archive_dest_2;<BR>&nbsp; 
+show parameter&nbsp; log_archive_dest_state_1;<BR>&nbsp; show parameter&nbsp; 
+log_archive_dest_state_2;<BR>5 show parameter db_file_name_convert;<BR>&nbsp; 
+show parameter log_file_name_convert;<BR>6 show parameter 
+standby_file_management<BR>7 show parameter&nbsp; log_archive_format;<BR>8 
+测试双方是否可以互联<BR>&nbsp; tnsping tnstestemr<BR>&nbsp; tnsping tnssbtest<BR>&nbsp; 
+sqlplus <A href="mailto:sys/sa@tnstestemr">sys/sa@tnstestemr</A> as 
+sysdba<BR>&nbsp; sqlplus <A href="mailto:sys/sa@tnsemr">sys/sa@tnsemr</A> as 
+sysdba<BR>*********************</P>
+<P><BR>【采用RMAN Duplicate 创建物理standby,生成备份库】<BR>*********************sese<BR>1 rman 
+target <A href="mailto:sys/sa@tnstestemr">sys/sa@tnstestemr</A> auxiliary <A 
+href="mailto:sys/sa@tnssbemr">sys/sa@tnssbemr</A>;<BR>2 拷贝库&nbsp; duplicate 
+target database for standby from active database 
+nofilenamecheck;<BR>*********************</P>
+<P>【添加standby日志组】&nbsp; 主备都做<BR>*********************<BR>select * from 
+V$logfile;&nbsp; --查询日志情况<BR>--主添加<BR>alter database add standby logfile group 4 
+('D:\APP\ADMINISTRATOR\ORADATA\EMR\stredo04.log') size 50M;<BR>alter 
+database add standby logfile group 5 
+('D:\APP\ADMINISTRATOR\ORADATA\EMR\stredo05.log') size 50M;<BR>alter 
+database add standby logfile group 6 
+('D:\APP\ADMINISTRATOR\ORADATA\EMR\stredo06.log') size 50M;<BR>alter 
+database add standby logfile group 7 
+('D:\APP\ADMINISTRATOR\ORADATA\EMR\stredo07.log') size 50M;</P>
+<P>--备添加<BR>alter database add standby logfile group 4 
+('D:\APP\ADMINISTRATOR\ORADATA\EMRSB\stredo04.log') size 50M;<BR>alter database 
+add standby logfile group 5 ('D:\APP\ADMINISTRATOR\ORADATA\EMRSB\stredo05.log') 
+size 50M;<BR>alter database add standby logfile group 6 
+('D:\APP\ADMINISTRATOR\ORADATA\EMRSB\stredo06.log') size 50M;<BR>alter database 
+add standby logfile group 7 ('D:\APP\ADMINISTRATOR\ORADATA\EMRSB\stredo07.log') 
+size 50M;<BR>*********************</P>
+<P><BR>【备库开启同步】<BR>*********************<BR>alter database open;<BR>select 
+open_mode,database_role,protection_mode,protection_level from v$database;&nbsp; 
+查询主备库当前的模式<BR>alter database set standby database to maximize 
+availability;&nbsp; --切换dataguad模式 最高可用</P>
+<P><BR>开启实时同步:&nbsp; alter database recover managed standby database using 
+current logfile disconnect from session;<BR>停止同步:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+alter database recover managed standby database 
+cancel;<BR>*********************</P>
+<P>【主备切换】<BR>*********************<BR>*********************</P>
+<P>【各类查询和设置汇总】<BR>set ORACLE_SID=testemr&nbsp;&nbsp;&nbsp; cmd命令设置默认数据库实例&nbsp; 
+<BR>select force_logging from v$database; alter database force 
+logging;&nbsp;&nbsp; force_logging设置所有sql都产生redo日志<BR>alter system flush 
+buffer_cache;&nbsp; alter system checkpoint;&nbsp;&nbsp; 
+关闭前可执行以下语句，提高关闭速度，主要是清楚缓冲区；手动将redo数据写入数据文件<BR>archive log 
+list;查询归档日志文件位置，和当前日志序列<BR>select log_mode from v$database;查询当前数据库归档日志状态 
+<BR>shutdown immediate; 关闭数据库<BR>startup mount;&nbsp;&nbsp; 数据库启动至mount状态 
+nomount&nbsp; open<BR>alter database archivelog;&nbsp; 
+启用归档，此设置必须重启数据库，同时启动至归档状态，在执行。因为修改的是控制文件<BR>alter database open;<BR>lsnrctl 
+start 监听名; 监听操作相关语句，启动&nbsp; 可忽略监听名，默认为LISTENER<BR>lsnrctl stop 监听名; 
+关闭<BR>lsnrctl status 监听名; 查看状态&nbsp; <BR>show parameter 
+db_unique_name;查询数据库唯一名称； show parameter&nbsp; 参数名 
+可以查询pfile中的各类参数值，支持前置模糊查询<BR>create spfile from 
+pfile;生成spfile文件，spfile文件是加密的，默认数据库会检查此文件参数。pfile为不加密，格式为INITxxx.ORA <BR>rman 
+target <A href="mailto:sys/sa@tnstestemr">sys/sa@tnstestemr</A>&nbsp; 
+rman的数据库密码连接方式<BR>rman target&nbsp; / ; 
+采用服务器管理员登录方式<BR>--查看rman备份耗时和进度<BR>select 
+inst_id,sid,serial#,opname,COMPLETE,<BR>trunc(((to_char(last_update_time,'dd')-to_char(start_time,'dd'))*60*24+(to_char(last_update_time,'hh24')-to_char(start_time,'hh24'))*60 
++(to_char(last_update_time,'mi')-to_char(start_time,'mi')))*(100-complete)/complete) 
+min from <BR>( <BR>SELECT inst_id,<BR>sid,<BR>serial#,<BR>opname,<BR>ROUND(SOFAR 
+/ TOTALWORK * 100, 2) COMPLETE,<BR>LAST_UPDATE_TIME,<BR>START_TIME<BR>FROM 
+gV$SESSION_LONGOPS<BR>WHERE OPNAME LIKE 'RMAN%'<BR>--AND OPNAME NOT LIKE 
+'%aggregate%'<BR>AND TOTALWORK != 0<BR>AND SOFAR &lt;&gt; TOTALWORK<BR>) t ;</P>
+<P>------------清除日志<BR>RMAN TARGET <A 
+href="mailto:SYS/sa@emr">SYS/sa@emr</A> DELETE ARCHIVELOG ALL COMPLETED BEFORE 
+'SYSDATE-7</P>
+<P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif,SimHei,SimSun; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">DELETE 
+noprompt force ARCHIVELOG ALL COMPLETED BEFORE 'SYSDATE-1'; </SPAN>      
+</P>
+<P>select * from v$managed_standby;&nbsp; --日志状态 备库查询<BR>select * from 
+V$standby_Log;&nbsp; --日志状态 备库查询<BR>alter system switch logfile;&nbsp; -- 日志状态 
+手动切换日志<BR>select * from　V$archive_dest;&nbsp; --日志状态<BR>select * 
+from　V$archive_dest_status;&nbsp; --状态<BR>select * from 
+v$dataguard_status;&nbsp; --dg状态日志视图<BR>select * from v$archived_log;</P>
+<P>   &nbsp;</P>
+<P>   --关闭归档日志</P>
+<P>&nbsp; shutdown immediate;<BR>&nbsp; startup 
+mount;<BR>&nbsp; alter database noarchivelog;<BR>&nbsp; alter database 
+open;<BR>&nbsp; archive log list;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><BR>&nbsp;</P>
+<P>&nbsp;</P></body>
+</html>

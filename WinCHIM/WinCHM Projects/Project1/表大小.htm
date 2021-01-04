@@ -1,0 +1,21 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>表大小</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>select t.segment_name, t.segment_type, sum(t.bytes / 
+1024 / 1024) "占用空间(M)"<BR>from dba_segments t<BR>where t.segment_type='TABLE' 
+and t.bytes &gt;(10*1024*1024）<BR>group by t.segment_type,OWNER,&nbsp; 
+t.segment_name</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>常用表</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>select username,default_tablespace from 
+dba_users;--查看用户和表空间　&nbsp;&nbsp;&nbsp; </P>
+<P>select name from v$datafile;-- 
+查看表空间位置 </P>
+<P>SELECT * FROM dba_tables&nbsp; where tablespace_name =    
+'TSP_YDEMR';--查看数据库所有表 </P>
+<P>   SELECT * FROM     
+USER_TABLES;--查看用户表 </P>
+<P>select distinct owner from dba_segments where 
+tablespace_name =     '&amp;TABLE_NAME'     
+;--查看表空间有哪些用户 </P>
+<P>     alter 
+trigger      SYS.XDB_PI_TRIG     
+disable;--禁用系统触发器 </P>
+<P>     alter 
+trigger      SYS.XDB_PI_TRIG     
+enable;--启用触发器 </P>
+<P>drop user NYDBA cascade;--删除用户</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+--user_tab_cols用来获取对应用户表的列信息；<BR>　　--user_col_comments用来获取对应用户表列的注释信息；<BR>　　--user_constraints用来获取用户表的约束条件；<BR>　　--user_cons_columns约束中用户可访问列。</P>
+<P>select 'drop table '||table_name||';' from cat where 
+table_type='TABLE'--删除所有表</P></body>
+</html>

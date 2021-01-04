@@ -1,0 +1,699 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>基本语法</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">1。regexp_like</P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">2。regexp_substr</P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">3。regexp_instr</P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"></SPAN>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">4。regexp_replace</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<TABLE class="table table-bordered table-striped table-condensed" 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; BORDER-TOP: rgb(192,192,192) 1px solid; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; BORDER-RIGHT: rgb(192,192,192) 1px solid; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); FONT-STYLE: normal; TEXT-ALIGN: left; BORDER-SPACING: 0px; BORDER-LEFT: rgb(192,192,192) 1px solid; ORPHANS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1">
+  
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >值</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >描述</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >^</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配一个字符串的开始。如果与“m”&nbsp;的<EM 
+      style="FONT-STYLE: normal">match_parameter</EM>一起使用，则匹配<EM 
+      style="FONT-STYLE: normal">表达式中</EM>任何位置的行的开头。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >$</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配字符串的结尾。如果与“m”&nbsp;的<EM 
+      style="FONT-STYLE: normal">match_parameter</EM>一起使用，则匹配<EM 
+      style="FONT-STYLE: normal">表达式中</EM>任何位置的行的末尾。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >*</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配零个或多个。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >+</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配一个或多个出现。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >？</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配零次或一次出现。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >。</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配任何字符，除了空。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >|</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >用“OR”来指定多个选项。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >[]</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >用于指定一个匹配列表，您尝试匹配列表中的任何一个字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >[^]</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >用于指定一个不匹配的列表，您尝试匹配除列表中的字符以外的任何字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >（）</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >用于将表达式分组为一个子表达式。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >{M}</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配m次。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >{M，}</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >至少匹配m次。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >{M，N}</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >至少匹配m次，但不多于n次。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      n</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >n是1到9之间的数字。在遇到\ 
+      n之前匹配在（）内找到的第n个子表达式。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >[..]</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配一个可以多于一个字符的整理元素。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >[：]</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配字符类。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >[==]</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配等价类。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      d</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配一个数字字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      D</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配一个非数字字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      w</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配包括下划线的任何单词字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      W</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配任何非单词字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      s</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配任何空白字符，包括空格，制表符，换页符等等。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\ 
+      S</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配任何非空白字符。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\A</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >在换行符之前匹配字符串的开头或匹配字符串的末尾。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >\Z</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配字符串的末尾。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >*？</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配前面的模式零次或多次发生。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >+？</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配前面的模式一个或多个事件。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >??</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配前面的模式零次或一次出现。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >{N}？</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配前面的模式n次。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >{N，}？</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配前面的模式至少n次。</TD></TR>
+  <TR>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >{N，M}？</TD>
+    <TD                                                                                                                                                                                                                                                      style="LIST-STYLE-TYPE: none; BORDER-TOP: rgb(192,192,192) 1px solid; BORDER-RIGHT: rgb(192,192,192) 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: rgb(192,192,192) 1px solid; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 14px; LIST-STYLE-IMAGE: none; BORDER-LEFT: rgb(192,192,192) 1px solid; MARGIN: 0px; PADDING-RIGHT: 14px; border-image-outset: 0; border-image-repeat: stretch; border-image-slice: 100%; border-image-source: none; border-image-width: 1"    >匹配前面的模式至少n次，但不超过m次。</TD></TR></TABLE></P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><BR>case when regexp_replace(a.temperature,'[0-9,.]', '') 
+IS NULL then to_number(a.temperature) else 0 end as 
+NIGHT_TEMPERATURE_VALUE,</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>大写 
+P 表示 Unicode 字符集七个字符属性之一：标点字符。<BR><BR><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">Regex 
+reg </SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">= 
+</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,255); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">new</SPAN><SPAN 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Courier New; FONT-VARIANT: normal; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word"> 
+Regex(</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(128,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">@"</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(128,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">\p{P}</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(128,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">"</SPAN><SPAN 
+style="TEXT-DECORATION: none; WHITE-SPACE: pre-wrap; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; TEXT-ALIGN: left; PADDING-TOP: 0px; FONT: 400 12px/1.5 Courier New; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">);</SPAN></SPAN>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>L：字母；&nbsp;</SPAN><BR 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; quot: ; PingFang: ; Helvetica: ; Arial: ; sans-serif: "><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>M：标记符号（一般不会单独出现）；&nbsp;</SPAN><BR 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; quot: ; PingFang: ; Helvetica: ; Arial: ; sans-serif: "><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>Z：分隔符（比如空格、换行等）；&nbsp;</SPAN><BR 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; quot: ; PingFang: ; Helvetica: ; Arial: ; sans-serif: "><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>S：符号（比如数学符号、货币符号等）；&nbsp;</SPAN><BR 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; quot: ; PingFang: ; Helvetica: ; Arial: ; sans-serif: "><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>N：数字（比如阿拉伯数字、罗马数字等）；&nbsp;</SPAN><BR 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; quot: ; PingFang: ; Helvetica: ; Arial: ; sans-serif: "><SPAN 
+style='FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: "PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(57,57,57); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>C：其他字符&nbsp;</SPAN>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">
+<TABLE style="HEIGHT: 1584px; WIDTH: 719px">
+  
+  <TR>
+    <TH>
+      <P><SPAN id=mt305 class="sentence" 
+      data-guid="c4ef352f74e502ef5e7bc98e6f4e493d" 
+      data-source="Category">类别</SPAN></P></TH>
+    <TH>
+      <P><SPAN id=mt306 class="sentence" 
+      data-guid="67daf92c833c41c95db874e18fcb2786" 
+      data-source="Description">说明</SPAN></P></TH></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Lu</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt307 class="sentence" 
+      data-guid="33cfe0bd648b15e972673bb2fc69011e" 
+      data-source  
+       
+      ="Letter, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Uppercase">字母，大写</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Ll</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt308 class="sentence" 
+      data-guid="337cfc8c009d84fad9e5de7f7b14a11f" 
+      data-source  
+       
+      ="Letter, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Lowercase">字母，小写</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Lt</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt309 class="sentence" 
+      data-guid="24f8910391b88ac5a241ce4f23ec71b0" 
+      data-source  
+       
+      ="Letter, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Titlecase">字母，首字母大写</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Lm</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt310 class="sentence" 
+      data-guid="705c69ace71d599cc35adcceb77a4694" 
+      data-source  
+       
+      ="Letter, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Modifier">字母，修饰符</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Lo</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt311 class="sentence" 
+      data-guid="e90a4391bb829bb9bc897a921fb57d0a" 
+      data-source  
+       
+      ="Letter, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Other">字母，其他</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>L</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt312 class="sentence" 
+      data-guid="df59c8c1d9bb4f47a811fd9c670bb8d4" 
+      data-source   
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; letter &#13;&#10;      characters.">所有字母字符。&nbsp;<SPAN id=mt313 
+      class="sentence" data-guid="25beb28070cae93aaf74c474a57944af" 
+      data-source        ='This &#13;&#10; &#13;&#10; &#13;&#10;  includes  the <span   
+      class ="input">Lu,  
+            <span class="input">Ll,   
+      <span class="input">Lt,   &#13;&#10;      <span class="input">Lm, and &#13;&#10;      &#13;&#10;      <span class="input">Lo characters.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Lu、<SPAN><SPAN class=input>Ll、<SPAN><SPAN 
+      class=input>Lt、<SPAN><SPAN class=input>Lm&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>Lo&nbsp;字符。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Mn</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt314 class="sentence" 
+      data-guid="b04576fdcd3350d9afb5982677110d7f" 
+      data-source  
+       
+      ="Mark, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Nonspacing">标记，非间距</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Mc</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt315 class="sentence" 
+      data-guid="73f40f42e0b92378f1896484e997ce84" 
+      data-source   
+       
+      ="Mark, &#13;&#10;      &#13;&#10; &#13;&#10; Spacing &#13;&#10;      Combining">标记，间距组合</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Me</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt316 class="sentence" 
+      data-guid="cccff9e6db1ee4f657451188151852d7" 
+      data-source  
+       
+      ="Mark, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Enclosing">标记，封闭</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>M</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt317 class="sentence" 
+      data-guid="d277b3983248070010eedaa2906529b9" 
+      data-source   
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; diacritic &#13;&#10;      marks.">所有音调符号标记。&nbsp;<SPAN id=mt318 
+      class="sentence" data-guid="637b2e6d4d2f8b09d658ba6a1e24aaaf" 
+      data-source        ='This  &#13;&#10; &#13;&#10;   
+      &#13;&#10;  includes  the 
+            <span  class  
+      ="input">Mn,   &#13;&#10;      <span class="input">Mc, and &#13;&#10;      &#13;&#10;      <span class="input">Me categories.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Mn、<SPAN><SPAN class=input>Mc&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>Me&nbsp;类别。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Nd</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt319 class="sentence" 
+      data-guid="341b6e629467fd8d021468ad12c9d936" 
+      data-source   
+       
+      ="Number, &#13;&#10;      &#13;&#10; &#13;&#10; Decimal &#13;&#10;      Digit">数字，十进制数</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Nl</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt320 class="sentence" 
+      data-guid="4e881ea6094326df8615bba0970c97db" 
+      data-source  
+       
+      ="Number, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Letter">数字，字母</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>No</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt321 class="sentence" 
+      data-guid="951175326356a97505025eac17d71605" 
+      data-source  
+       
+      ="Number, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Other">数字，其他</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>N</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt322 class="sentence" 
+      data-guid="0161ae81a95d9cd4cc43d2c672c6e321" 
+      data-source  
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      numbers.">所有数字。&nbsp;<SPAN id=mt323 class="sentence" 
+      data-guid="e9cb71f77d40e9db7690bce91f644ac2" 
+      data-source        ='This  &#13;&#10; &#13;&#10;   
+      &#13;&#10;  includes  the 
+            <span  class  
+      ="input">Nd,   &#13;&#10;      <span class="input">Nl, and &#13;&#10;      &#13;&#10;      <span class="input">No categories.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Nd、<SPAN><SPAN class=input>Nl&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>No&nbsp;类别。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Pc</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt324 class="sentence" 
+      data-guid="3638945f8776d0eff75872d8ca0655d5" 
+      data-source  
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Connector">标点，连接符</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Pd</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt325 class="sentence" 
+      data-guid="f2aa6c7515202ac23c40af7ece54055e" 
+      data-source  
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Dash">标点，短划线</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Ps</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt326 class="sentence" 
+      data-guid="ee62cf377bb8f65eb9b42c6c14ae0db1" 
+      data-source  
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Open">标点，开始</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Pe</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt327 class="sentence" 
+      data-guid="f525581634d80c69c17a0f6c75a7a458" 
+      data-source  
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Close">标点，结束</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Pi</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt328 class="sentence" 
+      data-guid="5f9c05072d2c7fbee22dd73f503091f4" 
+      data-source            
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; Initial quote (may behave like Ps or Pe depending on &#13;&#10;      usage)">标点，前引号（根据具体使用情况，作用可能像 
+      Ps 或 Pe）</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Pf</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt329 class="sentence" 
+      data-guid="5f5c306652f640b8da02e1c4e0f5b63f" 
+      data-source            
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; Final quote (may behave like Ps or Pe depending on &#13;&#10;      usage)">标点，后引号（根据具体使用情况，作用可能像 
+      Ps 或 Pe）</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Po</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt330 class="sentence" 
+      data-guid="f450fba6dfa01a3b0a0ff1be0f17a5b8" 
+      data-source  
+       
+      ="Punctuation, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Other">标点，其他</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>P</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt331 class="sentence" 
+      data-guid="d7dde0fbcfae552041e1c6d5cf9b0207" 
+      data-source   
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; punctuation &#13;&#10;      characters.">所有标点字符。&nbsp;<SPAN id=mt332 
+      class="sentence" data-guid="83277438c33c36fbebd67e163817bc5a" 
+      data-source        ='This &#13;&#10; &#13;&#10; &#13;&#10;  includes  the <span class ="input">Pc,  <span class="input">Pd,   
+      <span class="input">Ps,  
+            <span class="input">Pe,   
+      <span class="input">Pi,   &#13;&#10;      <span class="input">Pf, and &#13;&#10;      &#13;&#10;      <span class="input">Po categories.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Pc、<SPAN><SPAN class=input>Pd、<SPAN><SPAN 
+      class=input>Ps,&nbsp;<SPAN><SPAN class=input>Pe、<SPAN><SPAN 
+      class=input>Pi、<SPAN><SPAN class=input>Pf&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>Po&nbsp;类别。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Sm</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt333 class="sentence" 
+      data-guid="e28afe4136bdca5030b679670253dd77" 
+      data-source  
+       
+      ="Symbol, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Math">符号，数学</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Sc</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt334 class="sentence" 
+      data-guid="a0c82f35b84059b912fd2d33efb9b149" 
+      data-source  
+       
+      ="Symbol, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Currency">符号，货币</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Sk</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt335 class="sentence" 
+      data-guid="4388cfd9d03953d9d09b234086b0b1ef" 
+      data-source  
+       
+      ="Symbol, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Modifier">符号，修饰符</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>So</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt336 class="sentence" 
+      data-guid="1dce53109b71cf80f568b3b4ade92bff" 
+      data-source  
+       
+      ="Symbol, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Other">符号，其他</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>S</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt337 class="sentence" 
+      data-guid="f53efa380a41e725b1f38476f587faa8" 
+      data-source  
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      symbols.">所有符号。&nbsp;<SPAN id=mt338 class="sentence" 
+      data-guid="0b5aa15a4cb0d6a251bc879d75d4c570" 
+      data-source        ='This &#13;&#10; &#13;&#10;  &#13;&#10;  includes   
+      the <span class 
+            ="input" >Sm,   
+      <span class="input">Sc,   &#13;&#10;      <span class="input">Sk, and &#13;&#10;      &#13;&#10;      <span class="input">So categories.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Sm、<SPAN><SPAN class=input>Sc、<SPAN><SPAN 
+      class=input>Sk&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>So&nbsp;类别。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Zs</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt339 class="sentence" 
+      data-guid="695bde35980f36f1943e55f575b08491" 
+      data-source  
+       
+      ="Separator, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Space">分隔符，空白</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Zl</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt340 class="sentence" 
+      data-guid="6bc78070a5ad27d9f3153e3f625cc090" 
+      data-source  
+       
+      ="Separator, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Line">分隔符，行</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Zp</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt341 class="sentence" 
+      data-guid="688cc2589d31e4f27b3bb95dec45ab4d" 
+      data-source  
+       
+      ="Separator, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Paragraph">分隔符，段落</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Z</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt342 class="sentence" 
+      data-guid="9eb39ffa399ec588723ebacec57dbd73" 
+      data-source   
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; separator &#13;&#10;      characters.">所有分隔符字符。&nbsp;<SPAN id=mt343 
+      class="sentence" data-guid="bf88ecfd4e349c31775acf375e45900a" 
+      data-source        ='This  &#13;&#10; &#13;&#10;   
+      &#13;&#10;  includes  the 
+            <span  class  
+      ="input">Zs,   &#13;&#10;      <span class="input">Zl, and &#13;&#10;      &#13;&#10;      <span class="input">Zp categories.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Zs、<SPAN><SPAN class=input>Zl&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>Zp&nbsp;类别。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Cc</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt344 class="sentence" 
+      data-guid="9e45af33e07571a1acf05e209d797f5c" 
+      data-source  
+       
+      ="Other, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Control">其他，控制</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Cf</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt345 class="sentence" 
+      data-guid="308f7021bfeaba8697a6352105764145" 
+      data-source  
+       
+      ="Other, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Format">其他，格式</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Cs</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt346 class="sentence" 
+      data-guid="61b1487c542c6be529caa62ed4d54e3a" 
+      data-source  
+       
+      ="Other, &#13;&#10;      &#13;&#10; &#13;&#10; &#13;&#10;      Surrogate">其他，代理项</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Co</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt347 class="sentence" 
+      data-guid="eb8e8141a3f2e9140fc4a40d52f23c9c" 
+      data-source   
+       
+      ="Other, &#13;&#10;      &#13;&#10; &#13;&#10; Private &#13;&#10;      Use">其他，私用</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>Cn</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt348 class="sentence" 
+      data-guid="9d5b1f6095a6d5ae809c541fce02a534" 
+      data-source        
+       
+      ="Other, &#13;&#10;      &#13;&#10; &#13;&#10; Not Assigned (no characters have this &#13;&#10;      property)">其他，未赋值（任何字符都不具有此属性）</SPAN></P></TD></TR>
+  <TR>
+    <TD>
+      <P><SPAN class=input>C</SPAN></P></TD>
+    <TD>
+      <P><SPAN id=mt349 class="sentence" 
+      data-guid="27b9a7c2d76dbd3ee4c07085b8725948" 
+      data-source   
+       
+      ="All &#13;&#10;      &#13;&#10; &#13;&#10; control &#13;&#10;      characters.">所有控制字符。&nbsp;<SPAN id=mt350 
+      class="sentence" data-guid="f5e8b0b26cb5ce9f287535fdedb969d2" 
+      data-source        ='This &#13;&#10; &#13;&#10; &#13;&#10;  includes  the <span   
+      class ="input">Cc,  
+            <span class="input">Cf,   
+      <span class="input">Cs,   &#13;&#10;      <span class="input">Co, and &#13;&#10;      &#13;&#10;      <span class="input">Cn categories.'>这包括&nbsp;<SPAN><SPAN 
+      class=input>Cc、<SPAN><SPAN class=input>Cf、<SPAN><SPAN 
+      class=input>Cs、<SPAN><SPAN class=input>Co&nbsp;和&nbsp;<SPAN><SPAN 
+      class=input>Cn&nbsp;类别。</SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></SPAN></P></TD></TR></TABLE>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><FONT color=#ff0000>123(?:4|5)=1234|1235&lt;
+/FONT&gt;    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>(?:pattern) 
+非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(</SPAN><SPAN class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|)”来组合一个模式的各个部分是很有用。例如<FONT color=#ff0000>“industr(?:y|</FONT></SPAN><FONT color=#ff0000><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>ies)”就是一个比“industry</SPAN><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|industries”更简略的表达式。 
+</SPAN></FONT>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: "><FONT color=#ff0000>123(?=4|5) 
+=1234中的123或1235中的123</FONT> 
+</SPAN>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">(?=pattern) 
+非获取匹配，正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如<FONT color=#ff0000>，“Windows(?=95|&lt; 
+/FONT&gt;</SPAN><FONT color=#ff0000><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">98</SPAN><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|NT|</SPAN><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">2000</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>)”能匹配“Windows200</SPAN><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">0</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>”中的“Windows”，但不能匹配“Windows3.</SPAN><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">1</SPAN></FONT><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'><FONT color=#ff0000>”中的“Windows”。</FONT>预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。 
+</SPAN>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: "><FONT color=#ff0000 face=Tahoma>123(?!4|5) =1233中的123 
+不匹配1234中的123</FONT> 
+</SPAN> 
+</SPAN>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: "> 
+</SPAN> 
+</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>(?!pattern) 
+非获取匹配，正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如<FONT color=#ff0000>“Windows(?!</FONT> 
+</SPAN><FONT color=#ff0000><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">95</SPAN><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|98|</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>NT</SPAN><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</SPAN> 
+</FONT>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">&nbsp;(?&lt;=pattern) 非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如<FONT color=#ff0000>，windows“(?&lt;= 
+95|</SPAN><FONT color=#ff0000><SPAN class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">98</SPAN><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|NT|</SPAN><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">2000</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>)Windows”能匹配“</SPAN><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">2000</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>Windows”中的“Windows”，但不能匹配“</SPAN><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">3.1</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'> 
+ Windows”中的“Windows”。</SPAN></FONT>    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px">    
+        
+</P>
+<P 
+style="LIST-STYLE-TYPE: none; FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: Tahoma,Arial,Helvetica,sans-serif; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(68,68,68); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; ORPHANS: 2; MARGIN: 10px auto; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'> 
+(?&lt;!pattern) 非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如<FONT color=#ff0000>“windows(?&lt;!</FONT> 
+ </SPAN><FONT color=#ff0000><SPAN 
+class=hljs-number 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">95</SPAN><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: ">|98|</SPAN><SPAN 
+style='TEXT-DECORATION: none; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; COLOR: rgb(0,0,0); TEXT-ALIGN: left; FONT: 400 12px/1.5 "Courier New",sans-serif; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(245,245,245); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px'>NT</SPAN></FONT><SPAN 
+class=hljs-params 
+style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: &amp;quot; FONT-VARIANT: normal; WHITE-SPACE: pre; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); PADDING-BOTTOM: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; MARGIN: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; sans-serif: ; Courier: "><FONT color=#ff0000>|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。</FONT>这个地方不正确，有问题 
+</SPAN>    
+        
+</P></FONT></FONT></FONT></body>
+</html>

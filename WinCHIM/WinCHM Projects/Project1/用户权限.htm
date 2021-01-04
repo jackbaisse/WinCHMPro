@@ -1,0 +1,52 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>用户权限</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P style="MARGIN-RIGHT: 0px" dir=ltr><FONT size=2>1、users用户表</FONT></P>
+<P><FONT size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+jobid权限分类1、456,护士2、00管理员3、1111,医生4、44,医务处5、905,病历上报</FONT> 
+</P>
+<P><FONT size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+CATEGORY</FONT> 
+</P>
+<P>
+<TABLE style="BORDER-COLLAPSE: collapse" borderColor=#000000 cellSpacing=0 
+cellPadding=2 width="100%" border=1>
+  
+  <TR>
+    <TD><FONT size=2>&nbsp;字段</FONT></TD>
+    <TD><FONT size=2>&nbsp;备注</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>&nbsp; jobid</FONT></TD>
+    <TD><FONT size=2>&nbsp;权限分类1、456,护士2、00管理员3、1111,医生4、44,医务处5、905,病历上报</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>&nbsp;CATEGORY</FONT></TD>
+    <TD><FONT size=2>&nbsp;员工类别：1、402护士2、400医生3、401专家医生4、404其它5、403麻醉师</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>&nbsp;GRADE</FONT></TD>
+    <TD><FONT size=2>&nbsp;员工级别：1、2000 主任医师2、2001主治医师 3、 2002住院医师 4、2003副主任 
+      5、2004护士</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>&nbsp;</FONT></TD>
+    <TD><FONT size=2>&nbsp;</FONT></TD></TR></TABLE> 
+</P>
+<P>update users set category = 
+'402',grade='2004',jobid='456,' where id like '02%';--护理人员<BR>update users set 
+category = '400',grade='2003',jobid='1111,' where id like '01%';--医务人员<BR>update 
+users set category = '402',grade='2004',jobid='456,' where id not like 
+'01%';--其余人员<BR>update users set wb=get_wb(name) --五笔<BR>update users 
+set py =    fgetpy(name) --拼音</P></body>
+</html>

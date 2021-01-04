@@ -1,0 +1,27 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>判断服务是否启动</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>@echo off<BR>REM 将引号内部分改成你要查找的服务名称<BR>sc query |find /i 
+"OracleOraDb11g_home1TNSListener" &gt;nul 2&gt;nul<BR>REM 
+如果服务存在，跳转至exist标签<BR>if not errorlevel 1 (goto exist) else goto notexist</P>
+<P>:exist<BR>echo 该服务已经启动,正在停止。<BR>&nbsp;&nbsp;&nbsp; net stop 
+OracleOraDb11g_home1TNSListener<BR>&nbsp;&nbsp;&nbsp; net stop 
+OracleServiceORCL<BR>goto :eof</P>
+<P>:notexist<BR>&nbsp;&nbsp;&nbsp; echo 该服务已经停止，正在开启。<BR>&nbsp;&nbsp;&nbsp; net 
+start OracleOraDb11g_home1TNSListener<BR>&nbsp;&nbsp;&nbsp; net start 
+OracleServiceORCL<BR>goto :eof</P></body>
+</html>

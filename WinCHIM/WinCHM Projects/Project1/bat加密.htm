@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>bat加密</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a 
+%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a 
+%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a 
+%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a 
+%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a 
+%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a %%a 
+%%a %%a %%a %%a %%a %%a %%a %%a %%a %%a <BR>cls <BR>@echo off <BR>::color 2a 
+<BR>:start <BR>cls <BR>echo 
+******************************************************************************* 
+<BR>echo * BAT 加 密 最 终 版 * <BR>echo * <BR>echo * 
+拖入或输入路径（当前目录可直接输入文件名）.生成encrypt.bat在当前目录下. <BR>echo 
+******************************************************************************* 
+</P>
+<P>echo .<BR>echo .</P>
+<P>set /p file=请输入需要加密的批处理后按回车键(q=退出): <BR>if "%file%"=="q" goto quit <BR>echo 
+%file%|findstr /i "\.bat$"&gt;nul &amp;&amp; goto go <BR>echo %file%|findstr /i 
+"\.cmd$"&gt;nul &amp;&amp; goto go <BR>cls <BR>echo ============== <BR>echo 
+请正确输入! <BR>echo ============== <BR>echo. <BR>echo. <BR>echo 按任意键重新输入...... 
+<BR>pause&gt;nul <BR>goto start <BR>:go <BR>if not exist "%file%" goto newly 
+<BR>if exist encrypt.bat copy encrypt.bat encryptbak.bat <BR>echo %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+%%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a %%%%a 
+&gt;"%tmp%\encrypt.tmp" <BR>echo cls&gt;&gt;"%tmp%\encrypt.tmp" <BR>type 
+"%file%"&gt;&gt;"%tmp%\encrypt.tmp" <BR>setlocal enabledelayedexpansion <BR>for 
+%%i in ("%tmp%\encrypt.tmp") do ( <BR>echo %%~zi &gt;nul 2&gt;nul <BR>set 
+size=%%~zi <BR>set num=!size:~-1! <BR>set /a mod=!num!%%2 <BR>if !mod! equ 0 
+(goto even) else (goto odd) <BR>) <BR>:even <BR>copy "%tmp%\encrypt.tmp" 
+encrypt.bat <BR>del "%tmp%\encrypt.tmp" <BR>cls <BR>echo 
+========================== <BR>echo 恭喜你, 批处理加密成功^^! <BR>echo 
+========================== <BR>echo. <BR>echo. <BR>echo 按任意键退出...... 
+<BR>pause&gt;nul <BR>goto quit <BR>:odd <BR>echo. &gt;&gt;"%tmp%\encrypt.tmp" 
+<BR>copy "%tmp%\encrypt.tmp" encrypt.bat <BR>del "%tmp%\encrypt.tmp" <BR>cls 
+<BR>echo ========================== <BR>echo 恭喜你, 批处理加密成功^^! <BR>echo 
+========================== <BR>echo. <BR>echo. <BR>echo 按任意键退出...... 
+<BR>pause&gt;nul <BR>goto quit <BR>:newly <BR>cls <BR>echo 
+================================ <BR>echo 找不到批处理文件, 请重新输入! <BR>echo 
+================================ <BR>echo. <BR>echo. <BR>echo 按任意键开始...... 
+<BR>pause&gt;nul <BR>goto start <BR>:quit <BR>exit</P></body>
+</html>

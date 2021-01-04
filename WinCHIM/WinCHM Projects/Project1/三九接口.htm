@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>三九接口</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>--主表</P>
+<P>USE [DBGocent]<BR>GOCREATE VIEW 
+[dbo].[V_DATA_PRESCRIPTION_SJ]<BR>AS<BR>SELECT&nbsp;&nbsp;&nbsp;&nbsp; '' AS 
+AUTOID, dbo.mzcfd.mccfno AS ID, dbo.mzcfd.mcghno AS REGISTER_ID, a.m1name&nbsp; 
+AS NAME, <BR>(case a.m1sexx when '男性'then '男' else '女' end ) AS SEX, a.m1agex AS 
+AGE, a.m1telp AS TELE, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+'' AS EMAIL, dbo.bz02d.b2ejnm AS DEPARTMENT_NAME, dbo.bz01h.b1name AS 
+DOCTOR_NAME, dbo.mzcfd.mckind AS PRESCRIPTION_NAME, CONVERT(datetime, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.mzcfd.mcdat1) AS PRESCRIBE_TIME, '' AS CREATOR_NAME, '' AS CREATION_TIME, 
+'123' AS VALUE_SN, 'SUN' AS VALUER_NAME, CONVERT(datetime, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.mzcfd.mcdat1) AS VALUATION_TIME, SUM(dbo.mzcfd.mcpric) AS PRICE,dw.mcquty 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+* 2 AS QUANTITY, dw.mcquty&nbsp; AS QUANTITY_DAY, SUM(dbo.mzcfd.mcamnt) AS 
+PRICE_TOTAL, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.bz06h.b6lynm AS PAYMENT_TYPE, 'PAYED' AS PAYMENT_STATUS, 'HIS' AS 
+DATA_SOURCE, '' AS DEVICE_ID, 'NEW' AS PROCESS_STATUS, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+COUNT(dbo.mzcfd.mccfno) AS GRANULE_count, '' AS PRESCRIPTION_T, '' AS 
+PATIENT_LOCATION, '一天两次，一次一盒，开水冲服，谨遵医嘱' AS 
+DESCRIPTION<BR>FROM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.mzcfd&nbsp; WITH (nolock) LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.mza1h AS a WITH (nolock) ON a.m1ghno = dbo.mzcfd.mcghno AND a.m1date = 
+dbo.mzcfd.mcdate LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.bz02d WITH (nolock) ON dbo.bz02d.b2ejks = a.m1ksno LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.bz01h WITH (nolock) ON dbo.bz01h.b1empn = mzcfd.mcuser LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.bz06h WITH (nolock) ON dbo.bz06h.b6lyno = a.m1kind LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.yp01h WITH (nolock) ON dbo.yp01h.y1ypno = 
+dbo.mzcfd.mcypno<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; left join mzcfdw dw 
+WITH (nolock) on mzcfd.mccfno = dw.mccfno and 
+mzcfd.mcypno=dw.mcypno<BR>WHERE&nbsp;&nbsp;&nbsp;&nbsp; (dbo.yp01h.y1yplx = 
+'K')&nbsp; AND (DATEDIFF(day, CAST(CONVERT(varchar(19), dbo.mzcfd.mcdat2, 120) 
+AS datetime), GETDATE()) &lt; 2) AND 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(dbo.mzcfd.mccfno LIKE 'C%') AND (dbo.mzcfd.mcendv LIKE '7%') AND 
+(dbo.mzcfd.mcstoc='KFK2') <BR>GROUP BY dbo.mzcfd.mccfno, dbo.mzcfd.mcghno, 
+a.m1name, a.m1sexx, a.m1agex, a.m1telp, dbo.bz02d.b2ejnm, dbo.bz01h.b1name, 
+dbo.mzcfd.mccfno, CONVERT(datetime, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.mzcfd.mcdat1), dbo.bz06h.b6lynm, dbo.mzcfd.mckind,dw.mcquty </P>
+<P>--次表</P>
+<P>USE [DBGocent]<BR>GO</P>
+<P>/*select * from mzcfd where SUBSTRING(mccfno,1,1)='C'*/<BR>CREATE VIEW 
+[dbo].[V_DATA_PRESCRIPTION_DETAIL_SJ]<BR>AS</P>
+<P>SELECT&nbsp;&nbsp; distinct&nbsp; dbo.mzcfd.mccfno AS ID, CONVERT(int, 
+dbo.mzcfd.mcseq2) AS NO, dbo.mzcfd.mcypno AS GRANULE_ID, dbo.mzcfd.mcypnm AS 
+GRANULE_NAME, 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+CONVERT(decimal(15, 2), dbo.mzcfd.mcusex) AS DOSE_HERB, 0 AS EQUIVALENT, 0 AS 
+DOSE, CONVERT(decimal(15, 2), dbo.mzcfd.mcpric) AS 
+PRICE<BR>FROM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dbo.mzcfd WITH 
+(nolock) LEFT OUTER 
+JOIN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dbo.yp01h WITH (nolock) ON dbo.yp01h.y1ypno = 
+dbo.mzcfd.mcypno<BR>WHERE&nbsp;&nbsp;&nbsp;&nbsp; (dbo.yp01h.y1yplx = 'K')&nbsp; 
+AND (dbo.mzcfd.mccfno LIKE 'C%') AND (dbo.mzcfd.mcendv LIKE '7%') AND 
+(dbo.mzcfd.mcstoc='KFK2')</P>
+<P>GO</P></body>
+</html>
