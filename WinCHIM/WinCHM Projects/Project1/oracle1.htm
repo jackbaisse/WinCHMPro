@@ -14,6 +14,35 @@ html,body {
 
 </head>
 
-<body>New 
-Topic <EM>(Press Shift-Enter to insert a line break. Press Enter to add a paragraph return.)</EM></body>
+<body>
+<P>1、检查oracle实例状态</P>
+<P>&nbsp;select instance_name,host_name,startup_time,status,database_status from 
+v$instance;</P>
+<P>status:状态必须为open</P>
+<P>database_status: <SPAN 
+style='FONT-SIZE: 15px; FONT-FAMILY: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(64,64,64); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: 2px; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>表示Oracle当前数据库的状态，必须为“ACTIVE”</SPAN></P>
+<P>2、检查oracle在线日志状态</P>select group#,status,type,member 
+from v$logfile;
+<P>status :为空表示正常，非invalid,deleted</P>
+<P>3、检查oracle表空间状态</P>
+<P>select tablespace_name,status from dba_tablespaces;</P>
+<P>status:状态应为online</P>
+<P>4、检查oracle所有数据文件状态</P>
+<PRE>select name,status from v$datafile;</PRE>
+<PRE>status:状态应为online</PRE>
+<PRE>5、检查无效对象</PRE>
+<PRE>select owner,object_name,object_type from dba_objects where status!='VALID' and owner!='SYS' and owner!='SYSTEM';</PRE>
+<PRE>如果有记录返回</PRE>
+<PRE>SELECT owner, object_name, object_type FROM dba_objects WHERE status= 'INVALID';</PRE>
+<PRE>6、检查所有回滚段状态</PRE>
+<PRE>select segment_name,status from dba_rollback_segs;</PRE>
+<PRE>status:状态应为online</PRE>
+<PRE>二、检查oracle相关资源的使用情况</PRE>
+<PRE>1、检查oracle初始化文件中相关参数值</PRE>
+<PRE>select resource_name,max_utilization,initial_allocation, limit_value from v$resource_limit;</PRE>
+<PRE>2、检查数据库连接情况</PRE>
+<PRE>select count(*) from v$session;--连接数</PRE>
+<PRE>select sid,serial#,username,program,machine,status from v$session;--连接详情</PRE>
+<PRE>3、检查系统磁盘空间</PRE>
+<PRE>&nbsp;</PRE></body>
 </html>
