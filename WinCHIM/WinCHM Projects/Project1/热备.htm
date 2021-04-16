@@ -42,7 +42,7 @@ scope=both;--远程tms<BR>****************</P>
 durad传输<BR>路径：D:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN<BR>LISTENER1 
 =<BR>&nbsp; (DESCRIPTION_LIST =<BR>&nbsp;&nbsp;&nbsp; (DESCRIPTION 
 =<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS_LIST 
-=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL =                       TCP)(HOST = 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL =                           TCP)(HOST = 
 WIN-C08VPM2H9DN)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp;&nbsp; 
 )<BR>&nbsp; )</P>
 <P>SID_LIST_LISTENER1 =<BR>&nbsp; (SID_LIST =<BR>&nbsp;&nbsp;&nbsp; (SID_DESC 
@@ -88,7 +88,7 @@ testemr)<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp; )<BR>9
 配置静态LISTENER1监听<BR>&nbsp;路径：D:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN<BR>&nbsp;其中：testemr为数据库服务名，和主库一致，sbemr为sid，和主库不一致，唯一的。<BR>LISTENER1 
 =<BR>&nbsp; (DESCRIPTION_LIST =<BR>&nbsp;&nbsp;&nbsp; (DESCRIPTION 
 =<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS_LIST 
-=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL =                       TCP)(HOST = 
+=<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (ADDRESS = (PROTOCOL =                           TCP)(HOST = 
 192.168.0.250)(PORT = 1522))<BR>&nbsp;&nbsp;&nbsp; )<BR>&nbsp;&nbsp; )<BR>&nbsp; 
 )</P>
 <P>SID_LIST_LISTENER1 =<BR>&nbsp; (SID_LIST =<BR>&nbsp;&nbsp;&nbsp; (SID_DESC 
@@ -169,6 +169,22 @@ href="mailto:SYS/sa@emr">SYS/sa@emr</A> DELETE ARCHIVELOG ALL COMPLETED BEFORE
 <P><SPAN 
 style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif,SimHei,SimSun; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word">DELETE 
 noprompt force ARCHIVELOG ALL COMPLETED BEFORE 'SYSDATE-1'; </SPAN>      
+</P>
+<P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif,SimHei,SimSun; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word"> 
+      --校验归档日志 </SPAN>      
+</P>
+<P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif,SimHei,SimSun; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word"><SPAN 
+style="FONT-SIZE: 13px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(254,254,242); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">crosscheck 
+archivelog all;</SPAN> 
+       </SPAN>      
+</P>
+<P><SPAN 
+style="FONT-SIZE: 14px; TEXT-DECORATION: none; FONT-FAMILY: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif,SimHei,SimSun; FONT-VARIANT: normal; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: normal; COLOR: rgb(51,51,51); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; -webkit-text-stroke-width: 0px; overflow-wrap: break-word"><SPAN 
+style="FONT-SIZE: 13px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(254,254,242); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">delete 
+noprompt force archivelog all;</SPAN> 
+       </SPAN>      
 </P>
 <P>select * from v$managed_standby;&nbsp; --日志状态 备库查询<BR>select * from 
 V$standby_Log;&nbsp; --日志状态 备库查询<BR>alter system switch logfile;&nbsp; -- 日志状态 
