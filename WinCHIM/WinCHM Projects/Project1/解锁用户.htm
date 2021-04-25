@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>解锁用户</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、解锁</P>
+<P>alter user nydba account unlock;</P>
+<P>2、设置连续登入失败次数</P>
+<P>alter profile default limit failed_login_attempts 30;</P>
+<P>     3、设置为无限制</P>
+<P>alter profile default limit failed_login_attempts unlimited;</P>
+<P>     4、注意提交</P>
+<P>     commit;</P>
+<P>     二、解锁用户</P>
+<P>     1、alter user scott account unlock;--解锁用户</P>
+<P>     2、alter user scott identified by 
+tiger;--修改登入密码</P></body>
+</html>

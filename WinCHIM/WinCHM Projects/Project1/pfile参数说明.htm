@@ -1,0 +1,25 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>pfile参数说明</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、log_archive_start--启动归档器进程，11g版本启用归档模式自动开启</P>
+<P>2、变量说明<BR>1）%d唯一的数据库标识符，如果将多个数据库归档到同一目录，这是必需的<BR>2）%t线程号，显示为v$instance视图的thread#列，除了在RAC数据库中使用之外，这个变量没有任何意义<BR>3)&nbsp; 
+%r场景(incamation)号。如果进行了不完全恢复，这个变量就十分重要，它会重置日志切换序列号<BR>4）%s日志切换序列号。这个变量能够保存任何一个数据库中的归档日志都 
+不会彼此重写。</P>
+<P> 
+*************配置快速恢复区参数********************<BR>1、db_recovery_file_dest<BR>--指定位置<BR>2、db_recovery_file_dest_size<BR> 
+--设置数据库在目标中占用的最大空间量</P></body>
+</html>
