@@ -1,0 +1,48 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>重建undo表空间</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>startup mount;</P>
+<P>--删除undo表空间<BR>alter database datafile 
+'E:\app\jackbaisse\oradata\emr\undotbs01.dbf' offline for drop;</P>
+<P>alter database open;</P>
+<P>show parameter undo_tablespace;<BR>--查询undo表空间<BR>select a.name 
+tbs_name,b.name file_name,bytes/1024/1024 mb from v$tablespace a,v$datafile b 
+where a.ts#=b.ts# and a.name like 'UNDO%';<BR>--创建undo2表空间<BR>create undo 
+tablespace undotbs2 datafile 'E:\app\jackbaisse\oradata\emr\undo01.dbf' size 25m 
+blocksize 8192 extent management local autoallocate;<BR>--更改undo2表空间大小<BR>alter 
+tablespace undotbs2 add datafile 'E:\app\jackbaisse\oradata\emr\undo02.dbf' size 
+10480m autoextend off;<BR>--现在是mount状态，更改到startup状态<BR>alter system set 
+undo_tablespace='UNDOTBS2';<BR>--删除原来的undo表空间，提示找到活动回退段《编号》终止删除表空间<BR>drop 
+tablespace UNDOTBS1 including contents and datafiles;<BR>--ORA-01548: active 
+rollback segment '_SYSSMU2_2232571081$' found, terminate dropping 
+tablespace<BR>--报错后操作《编号》<BR>alter rollback segment '_SYSSMU2_2232571081$' 
+offline;<BR>--ORA-02245: invalid ROLLBACK SEGMENT name<BR>--<BR>col segment_name 
+for a40<BR>--<BR>select segment_name,status from 
+dba_rollback_segs;<BR>--查看spfile文件路径<BR>show parameter 
+spfile<BR>--创建spfile文件<BR>create 
+pfile='E:\app\jackbaisse\admin\emr\pfile\init.ora.3212021182739' from 
+spfile;</P>
+<P>--加载pfile文件<BR>startup 
+pfile='E:\app\jackbaisse\admin\emr\pfile\init.ora.3212021182739';</P>
+<P>--<BR>--删除undo1表空间<BR>drop tablespace UNDOTBS1 including contents and 
+datafiles;</P>
+<P>shutdown immediate</P>
+<P>startup</P>
+<P>--<BR>select a.name tbs_name,b.name file_name,bytes/1024/1024 mb from 
+v$tablespace a,v$datafile b where a.ts#=b.ts# and a.name like 
+'UNDO%';</P></body>
+</html>

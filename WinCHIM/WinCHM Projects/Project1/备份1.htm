@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>备份</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1、开启归档模式</P>
+<P>shutdown immediate;</P>
+<P>startup mount;</P>
+<P>alter database archivelog;</P>
+<P>alter database open;</P>
+<P>2、登入rman target /</P>
+<P>1、备份策略典型案例<BR>1）每半年做一个数据库的全备份（包括所有的数据和只读表空间）<BR>backup database;<BR>2）每一个月做一次零级备份（不包含只读表空间）<BR><SPAN 
+style='FONT-SIZE: 16px; FONT-FAMILY: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>backup incremental level 0 database;</SPAN><BR>3）每个星期做一次一级备份<BR><SPAN 
+style='FONT-SIZE: 16px; FONT-FAMILY: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>backup incremental level 1 database;</SPAN><BR>4）每天做一次二级备份<BR><SPAN 
+style='FONT-SIZE: 16px; FONT-FAMILY: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>backup incremental level 1 cumulative database;</SPAN>  </P>
+<P><SPAN 
+style='FONT-SIZE: 16px; FONT-FAMILY: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>1、全库备份脚本 <BR>run{<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c1 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c2 type disk;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c3 type disk;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; backup full tag ‘dbfull’ format 
+‘/u01/oradata/backup/full%u_%s_%p’ database
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; include current controlfile;
+<BR > &nbsp;&nbsp;&nbsp;&nbsp; sql ‘alter system archive log 
+current’;
+<BR >  &nbsp;&nbsp;&nbsp;&nbsp; backup fileaperset 3 
+format ‘/u01/oradata/backup/arch%u_%s_%p’
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; archivelog all delete input; 
+#备份归档可选，可以单独定期备份
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; release 
+channel c1;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; release channel 
+c2;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; release channel c3;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }</SPAN></P>
+<P>
+<SPAN 
+style='FONT-SIZE: 16px; FONT-FAMILY: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>零级备份脚本 
+<BR>run{<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c1 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c2 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c3 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; backup incremental level 0 tag 
+‘db0’ format ‘/u01/oradata/backup/db0%u_%s_%p’<BR>&nbsp;&nbsp;&nbsp;&nbsp; database skip readonly;<BR>&nbsp;&nbsp;&nbsp;&nbsp; sql ‘alter system archive log 
+current’;<BR>&nbsp;&nbsp;&nbsp;&nbsp; backup fileaperset 3 
+format ‘/u01/oradata/backup/arch%u_%s_%p’<BR>&nbsp;&nbsp;&nbsp;&nbsp; archivelog all delete input; 
+#备份归档可选，可以单独定期备份<BR>&nbsp;&nbsp;&nbsp;&nbsp; release 
+channel c1;<BR>&nbsp;&nbsp;&nbsp;&nbsp; release channel 
+c2;<BR>&nbsp;&nbsp;&nbsp;&nbsp; release channel c3;<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>一级备份脚本 
+<BR>&nbsp;&nbsp;&nbsp; run{<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c1 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c2 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; allocate channel c3 type disk;<BR>&nbsp;&nbsp;&nbsp;&nbsp; backup incremental level 1 tag 
+‘db1’ format ‘/u01/oradata/backup/db1%u_%s_%p’<BR>&nbsp;&nbsp;&nbsp;&nbsp; database skip readonly;<BR>&nbsp;&nbsp;&nbsp;&nbsp; sql ‘alter system archive log 
+current’;<BR>&nbsp;&nbsp;&nbsp;&nbsp; backup fileaperset 3 
+format ‘/u01/oradata/backup/arch%u_%s_%p’<BR>&nbsp;&nbsp;&nbsp;&nbsp; archivelog all delete input; 
+#备份归档可选，可以单独定期备份<BR>&nbsp;&nbsp;&nbsp;&nbsp; release 
+channel c1;<BR>&nbsp;&nbsp;&nbsp;&nbsp; release channel 
+c2;<BR>&nbsp;&nbsp;&nbsp;&nbsp; release channel c3;<BR>&nbsp;&nbsp;&nbsp;&nbsp; }</SPAN>  </P></body>
+</html>

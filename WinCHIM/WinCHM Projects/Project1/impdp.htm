@@ -44,7 +44,63 @@ emr.log&lt; /FONT &gt;
 <FONT color=#ff0000>  
 <FONT color= #ff0000><FONT color=#ff0000>
   
-1-4语句只要执行一次，以后不需要执行
+1-4语句只要执行一次，以后不需要执行</FONT></FONT></FONT></FONT></FONT>
+  
+<  P>
+  &nbsp;  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+   
+  
+<FONT color=#ff0000>
+<FONT color=#ff0000>  
+<FONT color= #ff0000><FONT color=#ff0000>
+  
+导入方式：<BR></FONT></FONT></FONT></FONT
+  
+>  <
+  /FONT>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+   
+  
+<FONT color=#ff0000>
+<FONT color=#ff0000>  
+<FONT color= #ff0000><FONT color=#ff0000><FONT color=#000000>1、“full=y”，全量导入数据库；<BR>impdp 
+user/passwd directory=data_dir dumpfile=expdp.dmp 
+full=y<BR>2、同名用户导入，从用户A导入到用户A；<BR>impdp A/passwd schemas=A directory=data_dir 
+dumpfile=expdp.dmp 
+logfile=impdp.log;<BR>3、<BR>①从A用户中把表table1和table2导入到B用户中；<BR>impdp 
+B/passwdtables=A.table1,A.table2 remap_schema=A:B directory=data_dir 
+dumpfile=expdp.dmp 
+logfile=impdp.log;<BR>②将表空间TBS01、TBS02、TBS03导入到表空间A_TBS，将用户B的数据导入到A，并生成新的oid防止冲突；<BR>impdp 
+A/passwd remap_tablespace=TBS01:A_TBS,TBS02:A_TBS,TBS03:A_TBS remap_schema=B:A 
+FULL=Y transform=oid:n <BR>directory=data_dir dumpfile=expdp.dmp 
+logfile=impdp.log<BR>4、导入表空间；<BR>impdp sys/passwd tablespaces=tbs1 
+directory=data_dir dumpfile=expdp.dmp logfile=impdp.log<BR>5、追加数据；<BR>impdp 
+sys/passwd directory=data_dir dumpfile=expdp.dmp schemas=system 
+table_exists_action=replace logfile=impdp.log; 
+<BR>--table_exists_action:导入对象已存在时执行的操作。有效关键字:SKIP,APPEND,REPLACE和TRUNCATE</FONT>
+  
+
 <P></P>
   
 
