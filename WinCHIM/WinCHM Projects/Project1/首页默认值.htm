@@ -17,17 +17,12 @@ html,body {
 <body>
 <P>select 
 a.districtid,a.districtname,b.cityid,b.cityname,c.provinceid,c.provincename&nbsp; 
-from s_district a<BR>left join s_city b on a.cityid =       b.cityid<BR>left join s_province c on b.provinceid =  
+from s_district a<BR>left join s_city b on a.cityid =                   b.cityid<BR>left join s_province c on b.provinceid =  
      c.provinceid<BR>where a.districtname= 
-'泰和县';<BR>-----------------设置默认值<BR>   
-updateiem_basicinfozy_defaultsetcsd_cityid='3608',xzz_cityid='3608',HKDZ_cityid='3608',jg_cityid='3608';--市<BR> 
+'泰和县';<BR>-----------------设置默认值<BR>updateiem_basicinfozy_defaultsetcsd_cityid='3608',xzz_cityid='3608',HKDZ_cityid='3608',jg_cityid='3608';--市<BR>updateiem_basicinfozy_defaultsetcsd_provinceid='36',xzz_provinceid='36',hkdz_provinceid='36',jg_provinceid='36';--省&lt;BR&gt;updateiem_basicinfozy_defaultsetcsd_districtid='360826',hkdz_districtid='360826',xzz_districtid='360826';--县</P>
+<   
   
-updateiem_basicinfozy_defaultsetcsd_provinceid='36',xzz_provinceid='36',hkdz_provinceid='36',jg_provinceid='36';--省< 
-  
-BR>updateiem_basicinfozy_defaultsetcsd_districtid='360826',hkdz_districtid='360826',xzz_districtid='360826';--县</P>
-<P>  update 
-  
-IEM_BASICINFOZY_DEFAULTsetXZZ_POST='343700',HKDZ_POST='343700',OFFICEPOST='343700'--邮编</P>
+P>updateIEM_BASICINFOZY_DEFAULTsetXZZ_POST='343700',HKDZ_POST='343700',OFFICEPOST='343700'--邮编</P>
 <P>--1、查询是否有病人信息数据<BR>select a.noofinpat,a.* from inpatient 
 a where patid='在这填写住院号' and patnoofhis='在这填写住院号';<BR>--2、更新病人信息<BR>update 
 inpatient set admitdate='2013-08-20 15:27:03' where patid='在这填写住院号' and 
@@ -42,9 +37,9 @@ inpatient a where patid=
 iem_mainpage_basicinfo_sx where noofinpat=(select a.noofinpat from inpatient a 
 where patid=   
   
-'在这填写住院号'andpatnoofhis='在这填写住院号');<   
+'在这填写住院号'andpatnoofhis='在这填写住院号');&lt;   
   
-/P><P>&nbsp;<   
+/P&gt;<P>&nbsp;&lt;   
   
-/P><P>&nbsp;</P></body>
+/P&gt;<P>&nbsp;</P></body>
 </html>

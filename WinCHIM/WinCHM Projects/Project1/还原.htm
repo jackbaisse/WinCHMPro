@@ -15,6 +15,23 @@ html,body {
 </head>
 
 <body>
+<P><FONT size=4>**********目标文件没有损坏情况直接迁移***********</FONT><BR>一、准备前工作<BR>1、原库操作<BR>startup 
+mount<BR>2、拷数据文件<BR>select name from v$datafile;<BR>select member from 
+v$logfile;<BR>select name from v$controlfile;<BR>3、备份spfile文件与参数控制文件<BR>create 
+pfile='D:\backup_pfile.ora' from spfile;<BR>alter database backup controlfile to 
+trace as 'D:\backup_ctlfile_trace.sql';<BR>二、目标库操作<BR>1、shutdown 
+immediate<BR>2、删除文件，拷原文件<BR>3、startup 
+nomount<BR>4、重建参数控制文件<BR>5、修改spfile文件路径，加载<BR>6、startup 
+mount<BR>7、还原数据库<BR>recover database<BR>8、alter database open;     
+     </P>
+<P> 
+*******************************************************     
+     </P>
+<P> 
+***********************目标文件损块迁移*********************     
+     </P>
+<P>     
+     </P>
 <P>**********************冷备还原*********************<BR>1、shutdown 
 immediate<BR>2、startup nomount<BR>3、创建控制文件<BR>STARTUP NOMOUNT<BR>CREATE 
 CONTROLFILE REUSE DATABASE "orcl" NORESETLOGS&nbsp; 

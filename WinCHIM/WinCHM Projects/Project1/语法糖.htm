@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>语法糖</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P>1. 自动属性<BR>未简化：手写私有变量+公有属性<BR>private string _name;<BR>public string 
+Name<BR>{<BR>&nbsp;get { return _name; }<BR>&nbsp;set { _name = value; 
+}<BR>}<BR>简化：声明空属性，编译器自动生成对应私有成员字段。<BR>public string Name { get; set; }<BR>2. 
+参数默认值和命名参数<BR>使用的指导原则：<BR>1）可以为方法和有参属性指定默认值<BR>2）有默认值的参数，必须定义在没有默认值的参数之后<BR>3）默认参数必须是常量<BR>4）ref和out参数不能指定默认值<BR>public 
+class User<BR>{<BR>&nbsp;public string Name { get; set; }<BR>&nbsp;public int 
+Age { get; set; }</P>
+<P>&nbsp;// 自动属性默认初始化<BR>&nbsp;public string Address { get; set; } = "江苏";</P>
+<P>&nbsp;// 设置参数默认值（age）<BR>&nbsp;public User(string name, string address, int 
+age = 18)<BR>&nbsp;{<BR>&nbsp;&nbsp;this.Name = name;<BR>&nbsp;&nbsp;this.Age = 
+age;<BR>&nbsp;&nbsp;this.Address = address;<BR>&nbsp;&nbsp;&nbsp; }<BR>}</P>
+<P>// 命名参数（指定address参数）<BR>User user = new User("小王",address:"苏州");<BR>3. 
+类型实例化<BR>// 使用对象初始化器:{},使用对象初始化器，必须提供一个无参的构造函数,可以只给部分属性初始化<BR>User user = new 
+User()<BR>{<BR>&nbsp;&nbsp;Name = "小王",<BR>&nbsp;Age = 18,<BR>&nbsp;Address = 
+"苏州",<BR>&nbsp;};<BR>4. 集合<BR>4.1 初始化List集合的值<BR>// 简化之前<BR>List&lt;string&gt; 
+listString = new 
+List&lt;string&gt;();<BR>listString.Add("小王");<BR>listString.Add("小贤");<BR>// 
+简化后<BR>List&lt;string&gt; listString = new List&lt;string&gt;() 
+{<BR>&nbsp;"小王",<BR>&nbsp;"小贤",<BR>};<BR>4.2 取List中的值<BR>// 简化之前<BR>foreach 
+(string str in listString)<BR>{<BR>&nbsp;Console.WriteLine(str);<BR>}<BR>// 
+简化之后<BR>listString.ForEach(s =&gt; Console.WriteLine(s));<BR>5. 
+隐式类型（var）<BR>程序员在声明变量时可以不指定类型，由编译器根据值来指定类型<BR>var定义变量有以下四个特点：<BR>1）必须在定义时初始化<BR>2）一旦初始化完成，就不能再给变量赋与初始值不同类型的值了<BR>3）var要求是局部变量<BR>4）使用var定义变量和object不同，它在效率上和使用强类型方式定义变量完全一样<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// 
+1.隐式类型在定义时必须初始化<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+//var name; 
+报错<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var 
+name = 
+"小王";<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 
+2.可以用同类型的其他隐式类型变量来初始化新的隐式类型变量<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+var age = 
+18;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var 
+ageTwo = 
+age;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 
+3.也可以用同类型的字面量来初始化隐式类型变量<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+var name = 
+"小王";<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name 
+= "小贤";<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 
+4.隐式类型局部变量还可以初始化数组而不指定类型<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+var array = new List&lt;string&gt;() { "小王","小贤",};<BR>6. 
+扩展方法<BR>扩展方法使你能够向现有类型“添加”方法，而无需创建新的派生类型、重新编译或以其他方式修改原始类型。 
+扩展方法是一种特殊的静态方法，但可以像扩展类型上的实例方法一样进行调用。<BR>注意：定义扩展方法的类必须和使用地方的类命名空间相同(如果不同命名空间记得先引入命名空间)<BR>// 
+为string 添加一个扩展方法（判断string是否为空||null）<BR>public static bool IsEmpty(this string 
+str)<BR>{<BR>&nbsp;return string.IsNullOrEmpty(str);<BR>}<BR>7. 匿名类型（Anonymous 
+type）<BR>匿名类型提供了一种方便的方法，可用来将一组只读属性封装到单个对象中，而无需首先显式定义一个类型。 类型名由编译器生成，并且不能在源代码级使用。 
+每个属性的类型由编译器推断。可通过使用 new 运算符和对象初始值创建匿名类型。</P>
+<P>匿名类型的限制：<BR>1）匿名类型不支持事件、自定义方法和自定义重写<BR>2）匿名类型是隐式封闭的<BR>3）匿名类型的实例创建只使用默认构造函数<BR>4）匿名类型没有提供可供控制的类名称（使用var定义的）<BR>var 
+unUser = new { Name = "小王", Age = 18, Phone = "123456" };<BR>8. 匿名方法（Anonymous 
+methods）<BR>普通方法定义方式，因为方法的存在是为了复用一段代码，所以一般会给方法取个名字，这个方法的引用就可以通过“方法名”调用</P>
+<P>匿名方法：<BR>但是有的方法，不需要复用，仅仅是使用一次就够了，所以不需要方法名，这种方法就叫做匿名方法。<BR>匿名方法必须结合委托使用。（潜在的意思就是：尽管没有方法名了，但方法的指针还是存放了某个委托对象中）</P>
+<P>注意：<BR>1）在编译后，会为每个匿名方法创建一个私有的静态方法，然后将此静态方法传给委托对象使用<BR>2）匿名方法编译后会生成委托对象，生成方法，然后把方法装入委托对象，最后赋值给声明的委托变量<BR>3）匿名方法可以省略参数，编译的时候会自动为这个方法按照委托签名的参数添加参数<BR>9. 
+dynamic动态对象<BR>.net4.0中引入了一个新类型 dynamic.该类型是一种静态类型，但类型为 dynamic 
+的对象会跳过静态类型检查.大多数情况下，该对象就像具有类型 object 一样.在编译时，将假定类型化为 dynamic 
+的元素支持任何操作<BR>dynamic dy = 
+"string";<BR>Console.WriteLine(dy.GetType());<BR>//输出：System.String<BR>dy = 
+100;<BR>Console.WriteLine(dy.GetType());<BR>//输出：System.Int32<BR>10. 
+字符串嵌入值<BR>c#6.0后新增的特性 $，用于代替string.Format("")<BR>// 之前<BR>var 
+str=string.Format("时间：{0}", DateTime.Now);<BR>// 改进<BR>var 
+str=$"时间：{DateTime.Now}";<BR>11. 问号(?)表达式<BR>11.1 
+可空类型修饰符（？）<BR>引用类型可以使用空引用表示一个不存在的值，而值类型通常不能表示为空。<BR>string str = null;// 
+正确<BR>//int i = null; // 错误<BR>为了使值类型也可为空，就可以使用可空类型，，可以使用 
+Nullable泛型结构来定义，但是微软为了语法更简洁，提供了?运算符来定义可空类型，二者效果是一样的，基本语法如<BR>下：<BR>值类型? 
+变量名=值;<BR>// 这二种定义可空类型的方法都是对的，但是？更简洁<BR>Nullable&lt;int&gt; intOne = 5;<BR>int? 
+intTwo = 5;<BR>11.2 三元（运算符）表达式（?: )<BR>int gender = 1;<BR>string str = gender == 
+1 ? "男" : "女";<BR>11.3 合并运算符(??)<BR>合并运算符使用??表示，当进行转换时，如果可空类型的值为 
+null，则使用默认值。<BR>int? intA = null;<BR>int intB = 100;<BR>intB = intA ?? 
+0;//此处intA为null，则将0赋值给intB</P>
+<P>int? intC = 500;<BR>intB = intC ?? 0;//此处intC不为null，则将500赋值给intB<BR>11.4 
+NULL检查运算符（?.）<BR>C# 6.0中，引入了 ?. 的运算符，可帮助编写更少的代码来处理 null 
+检查<BR>如果对象为NULL，则不进行后面的获取成员的运算，直接返回NULL<BR>string str = "abcd";<BR>string s1 = 
+null;<BR>Console.WriteLine(str?.Length);// 输出 
+4<BR>Console.WriteLine(s1?.Length);// 输出空<BR>11.5 "?[]"运算符<BR>int? first = 
+customers?[0].Orders.Count();<BR>12. 使用完毕后自动释放资源(Using || try 
+finally)<BR>为了节约资源，每次使用完毕后都要释放掉资源，其中可以使用Using和try 
+finally来进行释放资源操作。需要注意的是使用Using释放资源的对象都必须继承IDisposable接口（MSDN）。<BR>// try finally 
+写法<BR>SqlConnection conn = null;<BR>try<BR>{<BR>&nbsp;conn = new 
+SqlConnection("数据库连接字符串");<BR>&nbsp;conn.Open();<BR>}<BR>finally<BR>{<BR>&nbsp;conn.Close();<BR>&nbsp;conn.Dispose();<BR>}</P>
+<P>// Using写法<BR>using (SqlConnection conn=new 
+SqlConnection("数据库连接字符串"))<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+conn.Open();<BR>}<BR>13. 委托<BR>13.1 基本用法<BR>在.net 1.1时我们不得不声明方法后才在委托中使用<BR>在.net 
+2.0之后我们可以使用匿名委托，他不单可以简化写法，还可以在匿名委托中访问范围内的变量；<BR>再后来Lambda表达式来了，写法就更简便了。<BR>class 
+MyClass<BR>{<BR>&nbsp;//定义委托<BR>&nbsp;public delegate void TestDelegate(string 
+str);<BR>&nbsp;//定义委托方法<BR>&nbsp;public void Method(string 
+str)<BR>&nbsp;{<BR>&nbsp;&nbsp;Console.WriteLine(str);<BR>&nbsp;}<BR>&nbsp;public 
+void UseDelegate(TestDelegate d, string 
+str)<BR>&nbsp;{<BR>&nbsp;&nbsp;d(str);<BR>&nbsp;}<BR>}</P>
+<P>//调用委托<BR>MyClass mc = new MyClass();<BR>//调用定义的委托方法<BR>mc.UseDelegate(new 
+MyClass.TestDelegate(mc.Method), "Hello!");</P>
+<P>//使用匿名委托<BR>mc.UseDelegate(delegate(string 
+str)<BR>{<BR>&nbsp;Console.WriteLine(str);<BR>}, 
+"Hello!");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<BR>//使用Lambda表达式<BR>mc.UseDelegate(s 
+=&gt;<BR>{<BR>&nbsp;Console.WriteLine(s);<BR>}, "Hello!");<BR>13.2 
+内置委托<BR>CLR环境中给我们内置了几个常用委托Action、 Action、Func、Predicate，一般我们要用到委托的时候，尽量不要自己再定义一 
+个委托了，就用系统内置的这几个已经能够满足大部分的需求，且让代码符合规范。<BR>14. 
+Lambda表达式<BR>Lambda表达式是比匿名方法更简洁的一种匿名方法语法<BR>最基本的Lambda表达式语法:<BR>{参数列表}=&gt;{方法体}<BR>例如：<BR>(int 
+x)=&gt;{returm 
+x+1}<BR>说明：<BR>1、参数列表中的参数类型可以是明确类型或推断类型<BR>2、如果是推断类型，则参数的数据类型将由编译器根据上下文自动推断出来</P>
+<P>如果参数列表只包含一个推断类型参数时：<BR>参数列表=&gt;{方法体}<BR>前提：x的数据类型可以根据上下文推断出来<BR>x 
+=&gt;{returm x+1}</P>
+<P>如果方法体只包含一条语句时：<BR>{参数列表}=&gt;表达式<BR>{int x} =&gt; x+1;</P>
+<P>Lambda表达式示例：<BR>1、多参数，推断类型参数列表，表达式方法体<BR>(x,y) =&gt; 
+x*y<BR>2、无参数，表达式方法体<BR>() =&gt; 
+Console.WriteLine()<BR>3、多参数，推断类型参数列表，多语句方法体，需要使用{}<BR>(x,y) =&gt; 
+{Console.WriteLine(x);Console.WriteLine(y)}</P>
+<P>Lambda表达式缩写推演<BR>new Func&lt;string,int&gt;(delegate(string str){return 
+str.Length;});//内置委托<BR>delegate(string str){return 
+str.Length;}//匿名方法<BR>(string str)=&gt;{return 
+str.Length};//Lambda表达式<BR>(str)=&gt;str.Length;//让编译器推断类型<BR>str=&gt;str&gt;Length;//去掉不必要的括弧<BR>15. 
+标准查询运算符<BR>16. 
+Linq<BR>Linq:语言集成查询<BR>Linq是一组语言特性和API，使得你可以使用统一的方式编写各种查询。查询的对象包括XML、对象集合、SQL 
+Server数据库等等。<BR>Linq to Objects：主要负责对象的查询<BR>Linq to XML:主要负责XML的查询<BR>Linq to 
+ADO.NET：主要负责数据库的查询<BR>Linq to SQL<BR>Linq to DataSet<BR>Linq to Entities</P>
+<P>Linq查询的两种方式：<BR>1、查询方法方式：主要利用System.Linq.Enumerable类中定义的扩展方法和Lambda表达式进行查询<BR>2、查询语句方式：一种更接近SQL语法的查询方式</P>
+<P>查询语句VS查询方法<BR>1、CLR本身并不理解查询语句，它只理解查询方法<BR>2、编译器负责在编译时将查询语句翻译成查询方法<BR>3、大部分查询方法都有对应的查询语句形式：Select（）对应select、OrderBy（）对应orderby<BR>4、部分查询方法目前在C#中还没有对应的查询语句，如：Count()和Max()这时只能采用以下替代方案:<BR>查询方法<BR>查询语句+查询方法的混合方式</P></body>
+</html>
