@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>反编译生成文件</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html,body { 
+	/* Default Font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+}
+</style>
+
+</head>
+
+<body>
+<P class="reader-word-layer reader-word-s1-7" 
+style='FONT-SIZE: 18px; FONT-FAMILY: "Sitka Text", Georgia, Cambria, Calibri; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(249,245,233); TEXT-INDENT: 0px; margin-block: 0px; margin-inline: 0px; hyphens: manual; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial' 
+v-pre="">1、把dll⽂件导⼊到ildasm⼯具中，ildasm是由微软提供的.net程序反编译⼯具，位于“C:\Program&nbsp;Files&nbsp;(x86)\MicrosoftSDKs\Windows\v7.0A\Bin”</P>
+<P class="reader-word-layer reader-word-s1-7" 
+style='FONT-SIZE: 18px; FONT-FAMILY: "Sitka Text", Georgia, Cambria, Calibri; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(249,245,233); TEXT-INDENT: 0px; margin-block: 0px; margin-inline: 0px; hyphens: manual; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial' 
+v-pre="">2、在ildasm中File-&gt;dump，把dll⽂件转储为*.il⽂件存到某个指定⽂件夹⾥，得到*.il和*.res两个⽂件，有时也会有*.resource⽂件</P>
+<P class="reader-word-layer reader-word-s1-7" 
+style='FONT-SIZE: 18px; FONT-FAMILY: "Sitka Text", Georgia, Cambria, Calibri; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(249,245,233); TEXT-INDENT: 0px; margin-block: 0px; margin-inline: 0px; hyphens: manual; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial' 
+v-pre="">3、⽤记事本打开得到的*.il⽂件，找到对应的⽅法，进⾏修改(如果修改的代码太多，那则需要先学习⼀下“C#反编译之IL语法”)，具体情况具体分析，修改之后保存。</P>
+<P class="reader-word-layer reader-word-s1-7" 
+style='FONT-SIZE: 18px; FONT-FAMILY: "Sitka Text", Georgia, Cambria, Calibri; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(51,51,51); PADDING-BOTTOM: 0px; FONT-STYLE: normal; PADDING-TOP: 0px; PADDING-LEFT: 0px; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 0px; BACKGROUND-COLOR: rgb(249,245,233); TEXT-INDENT: 0px; margin-block: 0px; margin-inline: 0px; hyphens: manual; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial' 
+v-pre="">4、打开DOS命令，进⼊到c:\Windows\Microsoft.NET\Framework\v2.0.50727&gt;&nbsp;⽂件夹，然后输⼊命令：ilasm&nbsp;/dll/resource=a.res&nbsp;a.il（注意a.res和a.il两⽂件夹位置不可变），回车，就在对应⽬录下⽣成新的dll⽂件，如果不放⼼，可以⽤Refletor反编译⼯具重新反编译新的dll⽂件，检查代码。</P></body>
+</html>

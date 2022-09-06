@@ -15,8 +15,16 @@ html,body {
 </head>
 
 <body>
-<P>EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'退药申核' , 
-@level0type=N'SCHEMA',@level0name=N'dbo', 
+<P>EXEC sys.sp_addextendedproperty @name=N'MS_Description', 
+@value=N'退药申核' , @level0type=N'SCHEMA',@level0name=N'dbo', 
 @level1type=N'TABLE',@level1name=N'mzcfd', 
-@level2type=N'COLUMN',@level2name=N'mcckyp'<BR></P></body>
+@level2type=N'COLUMN',@level2name=N'mcckyp'</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>--字段<BR>--添加<BR>execute sp_addextendedproperty 
+'MS_Description','ff中11','user','dbo','table','EnglishWordbak','COLUMN','EnglishName';--加注释<BR>--修改<BR>execute 
+sp_updateextendedproperty 
+'MS_Description','ff中22','user','dbo','table','EnglishWordbak','COLUMN','EnglishName';--加注释<BR> 
+--删除<BR> 
+executesp_dropextendedproperty'MS_Description','user','dbo','table','EnglishWordbak','COLUMN','EnglishName';--删除<BR></P></body>
 </html>

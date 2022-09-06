@@ -14,9 +14,17 @@ html,body {
 
 </head>
 
-<body>select isnull(value,'') as 表注释 from 
-sys.extended_properties ex_p where ex_p.minor_id=0<BR>and 
-ex_p.major_id in (select id from sys.sysobjects&nbsp; &nbsp;a where a.name= 
+<body>
+<P>select isnull(value,'') as 表注释 from 
+sys.extended_properties ex_p where ex_p.minor_id=0<BR>and ex_p.major_id in (select id from 
+sys.sysobjects&nbsp; &nbsp;a where a.name= 'yp03d')--查表说明</P>
+<P>&nbsp;</P>
+<P>--表说明</P>
+<P>select <BR>&nbsp; ROW_NUMBER() OVER (ORDER BY a.object_id) AS No, a.name AS 
+表名,&nbsp; isnull(g.[value],'-') AS 说明<BR>from sys.tables a left join 
+sys.extended_properties g&nbsp; on (a.object_id = g.major_id AND g.minor_id = 
+0)< 
+        /P> 
   
-      'yp03d')--查表说明</body>
+      </body>
 </html>
